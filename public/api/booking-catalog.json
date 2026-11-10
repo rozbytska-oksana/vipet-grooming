@@ -1,0 +1,496 @@
+{
+  "breeds": [
+    {
+      "id": "maltipoo",
+      "label": "Мальтіпу",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "poodle",
+      "label": "Пудель",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "bichon",
+      "label": "Бішон-фрізе",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "cavapoo-cockapoo",
+      "label": "Кавапу / кокапу",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "doodles",
+      "label": "Лабрадудль / голдендудль",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "yorkie",
+      "label": "Йоркшир-тер’єр",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "biewer",
+      "label": "Бівер-йоркшир тер’єр",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "maltese",
+      "label": "Мальтійська болонка",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "shih-tzu",
+      "label": "Ши-тцу",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "spitz",
+      "label": "Шпіц",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "pekingese",
+      "label": "Пекінес",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "long-chihuahua",
+      "label": "Чихуахуа довгошерстний",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "spaniel",
+      "label": "Спанієль",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "cavalier",
+      "label": "Кавалер кінг чарльз спанієль",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "corgi",
+      "label": "Коргі",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "french-bulldog",
+      "label": "Французький бульдог",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "english-bulldog",
+      "label": "Англійський бульдог",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "pug",
+      "label": "Мопс",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "beagle",
+      "label": "Бігль",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "dachshund",
+      "label": "Такса",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "toy-terrier",
+      "label": "Той-тер’єр",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "chihuahua",
+      "label": "Чихуахуа",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "jack-russell",
+      "label": "Джек рассел",
+      "petType": "dog",
+      "group": "regular",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "mixed",
+      "label": "Метис",
+      "petType": "dog",
+      "group": "mixed",
+      "serviceIds": [
+        "complex",
+        "hygiene",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-0",
+      "label": "Хаскі",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-1",
+      "label": "Лабрадор",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-2",
+      "label": "Акіта",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-3",
+      "label": "Німецька вівчарка",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-4",
+      "label": "Доберман",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-5",
+      "label": "Кане-корсо",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-6",
+      "label": "Американський буллі",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-7",
+      "label": "Чау-чау",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-8",
+      "label": "Маламут",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-9",
+      "label": "Самоїд",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-10",
+      "label": "Коллі",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-11",
+      "label": "Бернський зенненхунд",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-12",
+      "label": "Сенбернар",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-13",
+      "label": "Стафордширський тер’єр",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-14",
+      "label": "Шіба-іну",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-15",
+      "label": "Ньюфаундленд",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "large-16",
+      "label": "Чорний тер’єр",
+      "petType": "dog",
+      "group": "large",
+      "serviceIds": [
+        "complex",
+        "bath"
+      ]
+    },
+    {
+      "id": "cat-general",
+      "label": "Кіт / кішка (крім мейн-куна)",
+      "petType": "cat",
+      "serviceIds": [
+        "bath",
+        "brush",
+        "brush-bath"
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "label": "Мейн-кун",
+      "petType": "cat",
+      "serviceIds": [
+        "brush",
+        "brush-bath"
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "complex",
+      "title": "Комплексний грумінг",
+      "petTypes": [
+        "dog"
+      ]
+    },
+    {
+      "id": "hygiene",
+      "title": "Гігієнічний догляд",
+      "petTypes": [
+        "dog"
+      ]
+    },
+    {
+      "id": "bath",
+      "title": "Купання",
+      "petTypes": [
+        "dog",
+        "cat"
+      ]
+    },
+    {
+      "id": "brush",
+      "title": "Вичісування без купання",
+      "petTypes": [
+        "cat"
+      ]
+    },
+    {
+      "id": "brush-bath",
+      "title": "Вичісування та купання",
+      "petTypes": [
+        "cat"
+      ]
+    }
+  ],
+  "extras": []
+}

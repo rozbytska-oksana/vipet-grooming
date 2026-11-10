@@ -1,0 +1,974 @@
+{
+  "currency": "UAH",
+  "entries": [
+    {
+      "id": "maltipoo-hygiene",
+      "label": "Мальтіпу",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "maltipoo-complex",
+      "label": "Мальтіпу",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 130000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "poodle-hygiene",
+      "label": "Пудель",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "poodle-complex",
+      "label": "Пудель",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 130000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "bichon-hygiene",
+      "label": "Бішон-фрізе",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "bichon-complex",
+      "label": "Бішон-фрізе",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 140000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cavapoo-cockapoo-hygiene",
+      "label": "Кавапу / кокапу",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cavapoo-cockapoo-complex",
+      "label": "Кавапу / кокапу",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 130000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "doodles-hygiene",
+      "label": "Лабрадудль / голдендудль",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "doodles-complex",
+      "label": "Лабрадудль / голдендудль",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 120000,
+        "maxMinor": 150000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "yorkie-hygiene",
+      "label": "Йоркшир-тер’єр",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "yorkie-complex",
+      "label": "Йоркшир-тер’єр",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "biewer-hygiene",
+      "label": "Бівер-йоркшир тер’єр",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "biewer-complex",
+      "label": "Бівер-йоркшир тер’єр",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "maltese-hygiene",
+      "label": "Мальтійська болонка",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "maltese-complex",
+      "label": "Мальтійська болонка",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "shih-tzu-hygiene",
+      "label": "Ши-тцу",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "shih-tzu-complex",
+      "label": "Ши-тцу",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "spitz-hygiene",
+      "label": "Шпіц",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "spitz-complex",
+      "label": "Шпіц",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 130000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "pekingese-hygiene",
+      "label": "Пекінес",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "pekingese-complex",
+      "label": "Пекінес",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "long-chihuahua-hygiene",
+      "label": "Чихуахуа довгошерстний",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 70000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "long-chihuahua-complex",
+      "label": "Чихуахуа довгошерстний",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "spaniel-hygiene",
+      "label": "Спанієль",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "spaniel-complex",
+      "label": "Спанієль",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 120000,
+        "maxMinor": 140000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cavalier-hygiene",
+      "label": "Кавалер кінг чарльз спанієль",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cavalier-complex",
+      "label": "Кавалер кінг чарльз спанієль",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "corgi-hygiene",
+      "label": "Коргі",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "corgi-complex",
+      "label": "Коргі",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "mixed-5-10-hygiene",
+      "label": "Метис 5–10 кг",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "mixed-5-10-complex",
+      "label": "Метис 5–10 кг",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "mixed-10-15-hygiene",
+      "label": "Метис 10–15 кг",
+      "group": "small-medium-long",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "mixed-10-15-complex",
+      "label": "Метис 10–15 кг",
+      "group": "small-medium-long",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "french-bulldog-hygiene",
+      "label": "Французький бульдог",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "french-bulldog-complex",
+      "label": "Французький бульдог",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "english-bulldog-hygiene",
+      "label": "Англійський бульдог",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "english-bulldog-complex",
+      "label": "Англійський бульдог",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "pug-hygiene",
+      "label": "Мопс",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "pug-complex",
+      "label": "Мопс",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "beagle-hygiene",
+      "label": "Бігль",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "beagle-complex",
+      "label": "Бігль",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "dachshund-hygiene",
+      "label": "Такса",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "dachshund-complex",
+      "label": "Такса",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "toy-terrier-hygiene",
+      "label": "Той-тер’єр",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 70000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "toy-terrier-complex",
+      "label": "Той-тер’єр",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "chihuahua-hygiene",
+      "label": "Чихуахуа",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 70000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "chihuahua-complex",
+      "label": "Чихуахуа",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 90000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "jack-russell-hygiene",
+      "label": "Джек рассел",
+      "group": "small-medium-short",
+      "service": "hygiene",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "jack-russell-complex",
+      "label": "Джек рассел",
+      "group": "small-medium-short",
+      "service": "complex",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 100000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "large-short",
+      "label": "Короткошерстні породи",
+      "group": "large",
+      "service": "complex",
+      "range": {
+        "minMinor": 110000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "large-medium",
+      "label": "Середньошерстні породи",
+      "group": "large",
+      "service": "complex",
+      "range": {
+        "minMinor": 120000,
+        "maxMinor": 120000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "large-long",
+      "label": "Довгошерстні породи",
+      "group": "large",
+      "service": "complex",
+      "range": {
+        "minMinor": 120000,
+        "maxMinor": 120000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cat-bath",
+      "label": "Купання кішки",
+      "group": "cats",
+      "service": "cat-bath",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cat-brush",
+      "label": "Вичісування кішки без купання",
+      "group": "cats",
+      "service": "cat-brush",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 90000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cat-brush-bath",
+      "label": "Вичісування та купання кішки",
+      "group": "cats",
+      "service": "cat-brush-bath",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "maine-brush",
+      "label": "Мейн-кун: вичісування без купання",
+      "group": "cats",
+      "service": "maine-brush",
+      "range": {
+        "minMinor": 100000,
+        "maxMinor": 110000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "maine-brush-bath",
+      "label": "Мейн-кун: вичісування та купання",
+      "group": "cats",
+      "service": "maine-brush-bath",
+      "range": {
+        "minMinor": 130000,
+        "maxMinor": 140000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "bath-under-5",
+      "label": "Купання порід до 5 кг",
+      "group": "bathing",
+      "service": "bath",
+      "range": {
+        "minMinor": 60000,
+        "maxMinor": 60000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "bath-5-10",
+      "label": "Купання порід 5–10 кг",
+      "group": "bathing",
+      "service": "bath",
+      "range": {
+        "minMinor": 70000,
+        "maxMinor": 70000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "bath-10-15",
+      "label": "Купання порід 10–15 кг",
+      "group": "bathing",
+      "service": "bath",
+      "range": {
+        "minMinor": 80000,
+        "maxMinor": 80000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "shampoo",
+      "label": "Купання лікувальними шампунями",
+      "group": "extras",
+      "service": "shampoo",
+      "range": {
+        "minMinor": 25000,
+        "maxMinor": 25000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "flea-bath",
+      "label": "Купання від бліх",
+      "group": "extras",
+      "service": "flea-bath",
+      "range": {
+        "minMinor": 25000,
+        "maxMinor": 25000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "hygiene-shave",
+      "label": "Вибривання гігієнічних зон",
+      "group": "extras",
+      "service": "hygiene-shave",
+      "range": {
+        "minMinor": 25000,
+        "maxMinor": 25000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "poodle-feet",
+      "label": "Вибривання пальців «пуделячі лапки»",
+      "group": "extras",
+      "service": "poodle-feet",
+      "range": {
+        "minMinor": 25000,
+        "maxMinor": 25000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "teeth",
+      "label": "Чищення зубів",
+      "group": "extras",
+      "service": "teeth",
+      "range": {
+        "minMinor": 25000,
+        "maxMinor": 25000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "cat-nails",
+      "label": "Обрізання кігтів кішки",
+      "group": "extras",
+      "service": "cat-nails",
+      "range": {
+        "minMinor": 10000,
+        "maxMinor": 10000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "small-nails",
+      "label": "Обрізання кігтів: маленькі породи",
+      "group": "extras",
+      "service": "small-nails",
+      "range": {
+        "minMinor": 15000,
+        "maxMinor": 15000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "large-nails",
+      "label": "Обрізання кігтів: великі породи",
+      "group": "extras",
+      "service": "large-nails",
+      "range": {
+        "minMinor": 20000,
+        "maxMinor": 20000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "ears",
+      "label": "Чистка вух",
+      "group": "extras",
+      "service": "ears",
+      "range": {
+        "minMinor": 10000,
+        "maxMinor": 20000,
+        "currency": "UAH"
+      },
+      "unit": "procedure"
+    },
+    {
+      "id": "dematting",
+      "label": "Вичісування ковтунів",
+      "group": "extras",
+      "service": "dematting",
+      "range": {
+        "minMinor": 50000,
+        "maxMinor": 50000,
+        "currency": "UAH"
+      },
+      "unit": "hour"
+    }
+  ],
+  "largeBreedDurations": [
+    {
+      "label": "Хаскі",
+      "minHours": 1.5,
+      "maxHours": 2
+    },
+    {
+      "label": "Лабрадор",
+      "minHours": 1.5,
+      "maxHours": 2
+    },
+    {
+      "label": "Акіта",
+      "minHours": 2,
+      "maxHours": 3
+    },
+    {
+      "label": "Німецька вівчарка",
+      "minHours": 2,
+      "maxHours": 2.5
+    },
+    {
+      "label": "Доберман",
+      "minHours": 1.5,
+      "maxHours": 1.5
+    },
+    {
+      "label": "Кане-корсо",
+      "minHours": 1.5,
+      "maxHours": 1.5
+    },
+    {
+      "label": "Американський буллі",
+      "minHours": 1.5,
+      "maxHours": 1.5
+    },
+    {
+      "label": "Чау-чау",
+      "minHours": 2,
+      "maxHours": 2.5
+    },
+    {
+      "label": "Маламут",
+      "minHours": 1.5,
+      "maxHours": 2.5
+    },
+    {
+      "label": "Самоїд",
+      "minHours": 2,
+      "maxHours": 4
+    },
+    {
+      "label": "Коллі",
+      "minHours": 2,
+      "maxHours": 3
+    },
+    {
+      "label": "Бернський зенненхунд",
+      "minHours": 2,
+      "maxHours": 3
+    },
+    {
+      "label": "Сенбернар",
+      "minHours": 2,
+      "maxHours": 3
+    },
+    {
+      "label": "Стафордширський тер’єр",
+      "minHours": 1.5,
+      "maxHours": 1.5
+    },
+    {
+      "label": "Шіба-іну",
+      "minHours": 1.5,
+      "maxHours": 2.5
+    },
+    {
+      "label": "Ньюфаундленд",
+      "minHours": 2,
+      "maxHours": 4
+    },
+    {
+      "label": "Чорний тер’єр",
+      "minHours": 2,
+      "maxHours": 4
+    }
+  ],
+  "policies": {
+    "dogAggressionSurchargeMinor": 50000,
+    "puppyDiscount": {
+      "underMonths": 6,
+      "percent": 20
+    },
+    "dematting": {
+      "hourlyMinor": 50000,
+      "billingUnit": "minute",
+      "rounding": null
+    },
+    "otherBreeds": "quote",
+    "priceFactors": ["Вага", "Розмір тварини", "Стан шерсті"],
+    "notes": [
+      "Знижку й доплати не застосовувати автоматично до уточнення порядку їх поєднання.",
+      "Тарифи лікувальних шампунів і купання від бліх збережено дослівно; чи це доплата — потребує уточнення.",
+      "Межі вагових категорій у джерелі перекриваються; автоматичну класифікацію ваги поки не застосовувати.",
+      "Великі породи: ціна за довжиною шерсті, без непідтвердженої прив’язки до порід."
+    ]
+  },
+  "inclusions": {
+    "smallMedium": ["Купання", "Гігієна", "Породна стрижка"],
+    "large": [
+      "Купання",
+      "Чистка вух",
+      "Підстригання кігтів",
+      "Вичісування",
+      "Породна стрижка за необхідності"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+name: Publish GitHub Pages review
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Read Pages configuration
+        id: pages
+        uses: actions/configure-pages@v5
+      - run: npm ci
+      - run: npm test
+      - name: Generate production-optimized review
+        run: npm run generate:pages
+        env:
+          NUXT_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+          VIPET_PAGES_ORIGIN: ${{ steps.pages.outputs.origin }}
+      - name: Check TypeScript
+        run: |
+          node node_modules/vue-tsc/bin/vue-tsc.js --noEmit --project .nuxt-pages/tsconfig.app.json
+          node node_modules/typescript/bin/tsc --noEmit --project .nuxt-pages/tsconfig.server.json
+          node node_modules/typescript/bin/tsc --noEmit --project .nuxt-pages/tsconfig.node.json
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .output-pages/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish review
+        id: deployment
+        uses: actions/deploy-pages@v4

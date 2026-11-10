@@ -1,0 +1,18 @@
+// Native default/text/resize cursors remain unchanged.
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+  a[href]:not([aria-disabled='true']),
+  button:enabled,
+  select:enabled,
+  summary,
+  input[type='checkbox']:enabled,
+  input[type='radio']:enabled,
+  label:has(input[type='checkbox']:enabled),
+  label:has(input[type='radio']:enabled),
+  [role='button']:not([aria-disabled='true']) {
+    // Intentional: this site-wide cursor choice overrides scoped pointer rules
+    // only on enabled action controls, without affecting text or drag controls.
+    cursor:
+      url('../icons/cursor-paw.svg') 12 12,
+      pointer !important;
+  }
+}

@@ -1,0 +1,90 @@
+@use './breakpoints' as bp;
+
+:root {
+  --color-black: #0b0c0e;
+  --color-charcoal: #1b1d21;
+  --color-graphite: #29292b;
+  --color-ivory: #f6f2e9;
+  --color-cream: #f4e8dd;
+  --color-silver: #bec2c8;
+  --color-gold: #c7a668;
+  --color-gold-highlight: #f6d797;
+  --color-gold-ink: #715323;
+  --color-line-dark: #737780;
+  --color-line-light: #8a8174;
+  --color-error-dark: #ffb4ab;
+  --color-error-light: #9b2424;
+  --color-success-dark: #a7d8b4;
+  --color-success-light: #245b35;
+
+  --surface: var(--color-graphite);
+  --surface-raised: var(--color-charcoal);
+  --text-primary: var(--color-ivory);
+  --text-secondary: var(--color-silver);
+  --border-control: var(--color-line-dark);
+  --focus-ring: var(--color-gold-highlight);
+  --feedback-error: var(--color-error-dark);
+  --feedback-success: var(--color-success-dark);
+
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
+  --font-display-english: 'Bodoni Moda', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-size-body: clamp(1.125rem, 1.05rem + 0.2vw, 1.25rem);
+  --font-size-secondary: 1rem;
+  --font-size-hero: clamp(3rem, 7vw, 7.5rem);
+  --font-size-heading: clamp(2.25rem, 4.5vw, 4.75rem);
+  --font-size-subheading: clamp(1.625rem, 2.4vw, 2.5rem);
+  --line-height-body: 1.6;
+  --line-height-heading: 1.1;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --header-height: 104px;
+  --container-max: 90rem;
+  --container-gutter: 1.25rem;
+  --text-measure: 68ch;
+  --section-space: clamp(5rem, 10vw, 7rem);
+  --radius-button: 999px;
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+  --button-gold-flow: linear-gradient(
+    110deg,
+    #c99a43 0%,
+    #f4dc97 14%,
+    #fff3c4 25%,
+    #e2bb66 38%,
+    #c99a43 50%,
+    #f4dc97 64%,
+    #fff3c4 75%,
+    #e2bb66 88%,
+    #c99a43 100%
+  );
+  --button-gold-fill: linear-gradient(110deg, var(--color-gold-highlight), var(--color-gold));
+
+  @include bp.medium {
+    --container-gutter: 2rem;
+    --section-space: clamp(7rem, 10vw, 9.5rem);
+  }
+
+  @include bp.x-large {
+    --container-gutter: clamp(2.5rem, 4vw, 5rem);
+    --section-space: clamp(9rem, 12vw, 12.5rem);
+  }
+}
+
+[data-surface='light'] {
+  --surface: var(--color-cream);
+  --surface-raised: var(--color-ivory);
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gold-ink);
+  --border-control: var(--color-line-light);
+  --focus-ring: var(--color-gold-ink);
+  --feedback-error: var(--color-error-light);
+  --feedback-success: var(--color-success-light);
+}

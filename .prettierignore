@@ -1,0 +1,20 @@
+node_modules/
+.nuxt/
+.output/
+.nuxt-bootstrap/
+coverage/
+docs/references/
+source-assets/
+public/images/
+public/fonts/
+package-lock.json
+npm-shrinkwrap.json
+pnpm-lock.yaml
+yarn.lock
+bun.lock
+bun.lockb
+
+# Isolated GitHub Pages build
+.nuxt-pages/
+.output-pages/
+artifacts/

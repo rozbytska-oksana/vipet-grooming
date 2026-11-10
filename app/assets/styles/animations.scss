@@ -1,0 +1,28 @@
+:root {
+  --motion-micro: 200ms;
+  --motion-state: 320ms;
+  --motion-reveal: 700ms;
+  --motion-hero: 1200ms;
+  --motion-shimmer: 650ms;
+  --motion-stagger: 80ms;
+  --motion-count-up: 1800ms;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    --motion-micro: 0ms;
+    --motion-state: 0ms;
+    --motion-reveal: 0ms;
+    --motion-hero: 0ms;
+    --motion-shimmer: 0ms;
+    --motion-stagger: 0ms;
+    --motion-count-up: 0ms;
+  }
+}
+
+// Typed angle lets the service-card highlight travel smoothly around its border.
+@property --service-border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
