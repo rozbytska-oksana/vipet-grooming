@@ -95,7 +95,6 @@ useScrollReveal(section);
   position: relative;
   overflow: clip;
   padding-block: clamp(2rem, 3vw, 3rem);
-  scroll-margin-top: 1.5rem;
   color: var(--text-primary);
   background:
     radial-gradient(ellipse at top left, rgb(255 253 246 / 65%), transparent 60%), var(--surface);

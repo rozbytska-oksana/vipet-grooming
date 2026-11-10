@@ -12,6 +12,7 @@ import headingFont from './assets/fonts/cormorant-garamond-italic-cyrillic.woff2
 const baseURL = useRuntimeConfig().app.baseURL;
 
 useHead({
+  meta: [{ name: 'format-detection', content: 'telephone=no' }],
   link: [
     { rel: 'icon', type: 'image/svg+xml', href: `${baseURL}favicon.svg` },
     { rel: 'icon', type: 'image/png', sizes: '48x48', href: `${baseURL}favicon-48.png` },

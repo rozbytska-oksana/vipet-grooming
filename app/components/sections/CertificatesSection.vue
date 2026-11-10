@@ -59,6 +59,7 @@
     </div>
     <div
       class="certificates__controls"
+      role="group"
       aria-label="Керування сертифікатами"
     >
       <button
@@ -76,6 +77,7 @@
       </button>
       <div
         class="certificates__dots"
+        role="group"
         aria-label="Оберіть сертифікат"
       >
         <button
@@ -113,8 +115,33 @@
       @keydown.left.prevent="navigate(-1)"
       @keydown.right.prevent="navigate(1)"
     >
+      <figure
+        v-if="active"
+        class="certificates__expanded"
+        tabindex="-1"
+        autofocus
+        :style="{ '--certificate-ratio': active.width / active.height }"
+      >
+        <img
+          class="certificates__preview"
+          :src="`${baseURL}${active.src}`"
+          alt=""
+          aria-hidden="true"
+          :width="active.width"
+          :height="active.height"
+        />
+        <img
+          :key="active.id"
+          class="certificates__full"
+          :class="{ 'certificates__full--ready': fullReady }"
+          :src="`${baseURL}${active.fullSrc}`"
+          :alt="active.alt"
+          :width="active.width"
+          :height="active.height"
+          @load="fullReady = true"
+        />
+      </figure>
       <button
-        ref="closeButton"
         class="certificates__close"
         type="button"
         aria-label="Закрити сертифікат"
@@ -148,17 +175,6 @@
           <path d="m10 6 6 6-6 6" />
         </svg>
       </button>
-      <figure
-        v-if="active"
-        class="certificates__expanded"
-      >
-        <img
-          :src="`${baseURL}${active.fullSrc}`"
-          :alt="active.alt"
-          :width="active.width"
-          :height="active.height"
-        />
-      </figure>
     </dialog>
   </section>
 </template>
@@ -199,8 +215,8 @@ watch(api, (value) => {
 const sizes = '(min-width: 1200px) 15vw, (min-width: 768px) 34vw, 68vw';
 const sources = (id: string, format: string) =>
   [480, 960].map((w) => `${baseURL}images/certificates/${id}-${w}.${format} ${w}w`).join(', ');
-const dialog = ref<HTMLDialogElement | null>(null),
-  closeButton = ref<HTMLButtonElement | null>(null);
+const dialog = ref<HTMLDialogElement | null>(null);
+const fullReady = ref(false);
 const active = ref<MediaItem | null>(null);
 let trigger: HTMLElement | null = null,
   animation: Animation | null = null,
@@ -219,13 +235,13 @@ const open = async (event: MouseEvent, item: MediaItem) => {
   if (dialog.value.open) return;
   trigger = event.currentTarget as HTMLElement;
   const origin = trigger.getBoundingClientRect();
+  fullReady.value = false;
   active.value = item;
   await nextTick();
   if (disposed || !dialog.value) return;
   previousOverflow = document.body.style.overflow;
   document.body.style.overflow = 'hidden';
   dialog.value.showModal();
-  closeButton.value?.focus({ preventScroll: true });
   const target = dialog.value.getBoundingClientRect();
   if (!reduced.value)
     animation = dialog.value.animate(
@@ -243,6 +259,7 @@ const navigate = (direction: number) => {
   if (!active.value || closing) return;
   const index = certificates.findIndex((item) => item.id === active.value?.id);
   const nextIndex = (index + direction + certificates.length) % certificates.length;
+  fullReady.value = false;
   active.value = certificates[nextIndex] ?? null;
   api.value?.scrollTo(nextIndex, reduced.value);
 };
@@ -431,16 +448,32 @@ onBeforeUnmount(() => {
     }
   }
   &__expanded {
+    position: relative;
+    width: min(calc(100vw - 2rem - 6px), calc((100dvh - 2rem - 6px) * var(--certificate-ratio)));
+    aspect-ratio: var(--certificate-ratio);
     margin: 0;
-    text-align: center;
+    outline: none;
   }
   &__expanded img {
+    position: absolute;
+    inset: 0;
     display: block;
-    width: auto;
-    height: auto;
-    max-width: calc(100vw - 2rem - 6px);
-    max-height: calc(100dvh - 2rem - 6px);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     border-radius: 3px;
+  }
+  &__full {
+    opacity: 0;
+    transition: opacity 200ms ease;
+
+    &--ready {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
   &__dots {
     display: flex;

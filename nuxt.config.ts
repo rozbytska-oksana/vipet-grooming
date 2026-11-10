@@ -16,6 +16,28 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/styles/main.scss'],
   experimental: { prerenderErrorPages: true },
+  features: { inlineStyles: true },
+  hooks: {
+    'build:manifest'(manifest) {
+      // These chunks load when their visible-hydration boundary or motion needs them.
+      for (const chunk of Object.values(manifest)) {
+        if (
+          [
+            'gsap',
+            'ScrollTrigger',
+            'embla-carousel-vue.esm',
+            'GroomerSection',
+            'BeforeAfterSection',
+            'PetGallerySection',
+            'TestimonialsSection',
+          ].includes(chunk.name || '')
+        ) {
+          chunk.preload = false;
+          chunk.prefetch = false;
+        }
+      }
+    },
+  },
   runtimeConfig: {
     public: {
       siteUrl,

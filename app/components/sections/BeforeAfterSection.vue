@@ -143,6 +143,7 @@
       <div
         ref="viewport"
         class="comparison__viewport"
+        role="group"
         :class="{ 'comparison__viewport--ready': api }"
         aria-label="Роботи до та після грумінгу"
       >
@@ -283,7 +284,6 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   color-scheme: light;
   overflow: clip;
-  scroll-margin-top: 1.5rem;
   &__layout {
     display: grid;
     align-items: center;

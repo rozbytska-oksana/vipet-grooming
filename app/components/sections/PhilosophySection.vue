@@ -159,7 +159,6 @@ onBeforeUnmount(clear);
   background: linear-gradient(110deg, #f7f1ea, #f0e5d9 55%, #f7f1ea);
   color: #242326;
   color-scheme: light;
-  scroll-margin-top: 1.5rem;
 
   &__layout {
     display: grid;

@@ -65,6 +65,7 @@
                 <div
                   v-if="item.rating"
                   class="testimonials__rating"
+                  role="img"
                   :aria-label="`${item.rating} з 5`"
                 >
                   <svg
@@ -110,6 +111,7 @@
         <div
           v-if="testimonials.length > 1"
           class="testimonials__controls"
+          role="group"
           aria-label="Керування відгуками"
         >
           <button
@@ -233,7 +235,6 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   color-scheme: light;
   overflow: clip;
-  scroll-margin-top: 1.5rem;
   &__heading {
     text-align: center;
     margin-bottom: 1rem;

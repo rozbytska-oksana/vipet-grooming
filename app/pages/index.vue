@@ -7,12 +7,12 @@
     >
       <HeroSection />
       <ServicesSection />
-      <GroomerSection />
-      <BeforeAfterSection />
+      <GroomerSection :hydrate-on-visible="{ rootMargin: '300px' }" />
+      <BeforeAfterSection :hydrate-on-visible="{ rootMargin: '300px' }" />
       <PricingSection @booking="prefillBooking" />
       <PhilosophySection />
-      <PetGallerySection />
-      <TestimonialsSection />
+      <PetGallerySection :hydrate-on-visible="{ rootMargin: '300px' }" />
+      <TestimonialsSection :hydrate-on-visible="{ rootMargin: '300px' }" />
       <BookingSection :prefill="selection" />
       <FaqSection />
     </main>
@@ -35,18 +35,30 @@ import SiteFooter from '../components/layout/SiteFooter.vue';
 import HeroSection from '../components/sections/HeroSection.vue';
 import PhilosophySection from '../components/sections/PhilosophySection.vue';
 import ServicesSection from '../components/sections/ServicesSection.vue';
-import GroomerSection from '../components/sections/GroomerSection.vue';
-import BeforeAfterSection from '../components/sections/BeforeAfterSection.vue';
-import PetGallerySection from '../components/sections/PetGallerySection.vue';
+const GroomerSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/GroomerSection.vue'),
+);
+const BeforeAfterSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/BeforeAfterSection.vue'),
+);
+const PetGallerySection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/PetGallerySection.vue'),
+);
 import PricingSection from '../components/sections/PricingSection.vue';
-import TestimonialsSection from '../components/sections/TestimonialsSection.vue';
+const TestimonialsSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/TestimonialsSection.vue'),
+);
 import FaqSection from '../components/sections/FaqSection.vue';
 import BookingSection from '../components/sections/BookingSection.vue';
 const selection = ref<PricingSelection | null>(null);
 const openBooking = () => {
   const target = document.getElementById('booking-title');
   target?.focus({ preventScroll: true });
-  target?.scrollIntoView({
+  document.getElementById('booking')?.scrollIntoView({
     behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
     block: 'start',
   });

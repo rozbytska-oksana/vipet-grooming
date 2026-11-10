@@ -428,7 +428,6 @@ const duration = computed(() => {
   padding-block: clamp(2.5rem, 5vw, 5rem);
   background: radial-gradient(ellipse at 70% 30%, #38383a, #242426 65%);
   color: var(--color-ivory);
-  scroll-margin-top: 1.5rem;
   &__ambience {
     position: absolute;
     z-index: -1;

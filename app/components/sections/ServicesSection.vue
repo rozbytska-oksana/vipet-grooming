@@ -52,12 +52,12 @@
               <source
                 type="image/avif"
                 :srcset="`${baseURL}images/services/${item.image}-v2-384.avif 384w, ${baseURL}images/services/${item.image}-v2-768.avif 768w`"
-                sizes="(min-width: 1200px) 20vw, (min-width: 768px) 33vw, 100vw"
+                :sizes="imageSizes"
               />
               <img
                 :src="`${baseURL}images/services/${item.image}-v2-768.webp`"
                 :srcset="`${baseURL}images/services/${item.image}-v2-384.webp 384w, ${baseURL}images/services/${item.image}-v2-768.webp 768w`"
-                sizes="(min-width: 1200px) 20vw, (min-width: 768px) 33vw, 100vw"
+                :sizes="imageSizes"
                 :alt="item.alt"
                 width="768"
                 height="768"
@@ -96,6 +96,8 @@ const section = ref<HTMLElement | null>(null);
 const baseURL = useRuntimeConfig().app.baseURL;
 useScrollReveal(section, { duration: 900, fromOpacity: 0, easing: 'ease-out' });
 const cards = serviceCards;
+const imageSizes =
+  '(min-width: 1200px) calc((min(100vw, 90rem) - clamp(5rem, 8vw, 10rem) - clamp(3rem, 5vw, 5rem) - 10px) / 5), (min-width: 768px) calc((100vw - 4rem - clamp(1.5rem, 2.5vw, 2.5rem) - 6px) / 3), calc(100vw - 2.5rem - 2px)';
 </script>
 
 <style scoped lang="scss">
@@ -105,7 +107,6 @@ const cards = serviceCards;
   padding-block: clamp(2.5rem, 3vw, 5rem);
   background: linear-gradient(110deg, #f7f1ea, #f0e5d9 55%, #f7f1ea);
   color: var(--text-primary);
-  scroll-margin-top: 1.5rem;
   color-scheme: light;
 
   &__heading {

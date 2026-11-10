@@ -220,18 +220,16 @@
         </nav>
       </div>
       <div class="site-footer__bottom">
-        <span>V.I.Pet Grooming Salon</span>
+        <span>© V.I.Pet {{ currentYear }}</span>
         <p class="site-footer__credit">
-          Created by
           <a
             href="https://www.linkedin.com/in/oksana-rozbytska-4a29291a2/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Oksana
+            Created by Oksana
           </a>
         </p>
-        <span>Кожен улюбленець особливий</span>
       </div>
     </BaseContainer>
   </footer>
@@ -246,6 +244,7 @@ import BackToTop from '../ui/BackToTop.vue';
 import { business, businessHours } from '../../data/salon';
 import { navigationItems } from '../../data/navigation';
 import { googleMapsUrl } from '../../data/testimonials';
+const currentYear = new Date().getFullYear();
 const ornamentId = `footer-gold-${useId()}`;
 const footerLinks = navigationItems.filter((item) => item.available && item.href !== '#contacts');
 </script>
@@ -266,7 +265,6 @@ const footerLinks = navigationItems.filter((item) => item.available && item.href
   border-top: 1px solid rgb(230 196 118 / 25%);
   color: var(--text-primary);
   color-scheme: dark;
-  scroll-margin-top: 1.5rem;
   &__content {
     position: relative;
     z-index: 1;
@@ -426,9 +424,6 @@ const footerLinks = navigationItems.filter((item) => item.available && item.href
     }
   }
   &__credit {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.3em;
     margin: 0;
     color: inherit;
     font: inherit;
@@ -446,14 +441,17 @@ const footerLinks = navigationItems.filter((item) => item.available && item.href
   &__bottom {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    padding-top: 1.25rem;
+    gap: 0.5rem 1rem;
+    padding-top: 1rem;
     border-top: 1px solid rgb(230 196 118 / 20%);
-    color: var(--text-secondary);
-    font-size: 1rem;
     padding-right: 3.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    @include bp.medium {
+      justify-content: flex-end;
+    }
   }
 }
 </style>

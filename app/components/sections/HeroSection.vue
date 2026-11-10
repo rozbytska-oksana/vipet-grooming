@@ -58,11 +58,18 @@
                 v-for="(clip, index) in wordmarkClips"
                 :key="index"
                 class="hero__letter"
-                :style="{ clipPath: clip }"
+                :style="{ clipPath: clip, '--letter-index': index }"
               >
                 <img
                   :src="`${baseURL}images/brand/wordmark-original-768.webp`"
-                  :srcset="`${baseURL}images/brand/wordmark-original-768.webp 768w, ${baseURL}images/brand/wordmark-original-1536.webp 1536w`"
+                  :srcset="
+                    [384, 512, 768, 1536]
+                      .map(
+                        (width) =>
+                          `${baseURL}images/brand/wordmark-original-${width}.webp ${width}w`,
+                      )
+                      .join(', ')
+                  "
                   sizes="(min-width: 1200px) min(34vw, clamp(22.05rem, 31.5vw, 28.35rem)), (min-width: 768px) clamp(17.325rem, 47.25vw, 26.775rem), clamp(14.175rem, 64.575vw, 16.5375rem)"
                   width="2288"
                   height="620"
@@ -786,6 +793,103 @@ useHead({
     @include bp.x-large {
       height: 140px;
     }
+  }
+}
+
+// Render-blocking component CSS starts the entrance before hydration or GSAP imports.
+// Backwards fill covers each delay; the underlying styles restore final opacity/transform.
+@media (prefers-reduced-motion: no-preference) {
+  .hero {
+    &__light {
+      animation: hero-fade-in 1.2s ease-out backwards;
+    }
+
+    &__eyebrow {
+      animation: hero-rise-in 1.25s ease-out 0.2s backwards;
+    }
+
+    &__letter {
+      animation: hero-rise-in 0.95s ease-out backwards;
+      animation-delay: calc(0.45s + var(--letter-index) * 0.17s);
+    }
+
+    &__divider {
+      animation: hero-line-in 1.4s ease-out 1s backwards;
+    }
+
+    &__image {
+      animation: hero-image-in 2s ease-out backwards;
+    }
+
+    &__description {
+      animation: hero-rise-in 1.5s ease-out 1.15s backwards;
+    }
+
+    &__lead {
+      animation: hero-rise-in 1.2s ease-out 1.55s backwards;
+    }
+
+    &__ribbon path,
+    &__left-waves path {
+      animation: hero-stroke-in 1.7s ease-out 1.3s backwards;
+    }
+
+    &__left-waves ellipse {
+      animation: hero-fade-in 1.6s ease-out 1.5s backwards;
+    }
+
+    &__particles i {
+      animation: hero-rise-in 1.1s ease-out backwards;
+
+      @for $index from 1 through 7 {
+        &:nth-child(#{$index}) {
+          animation-delay: #{1.65 + ($index - 1) * 0.1}s;
+        }
+      }
+    }
+
+    &__value {
+      animation: hero-rise-in 1.1s ease-out backwards;
+
+      @for $index from 1 through 3 {
+        &:nth-child(#{$index}) {
+          animation-delay: #{1.9 + ($index - 1) * 0.16}s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-rise-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@keyframes hero-image-in {
+  from {
+    translate: 0 16px;
+  }
+}
+
+@keyframes hero-line-in {
+  from {
+    scale: 0 1;
+  }
+}
+
+@keyframes hero-stroke-in {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
   }
 }
 </style>

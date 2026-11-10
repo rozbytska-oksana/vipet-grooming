@@ -83,7 +83,13 @@
           @cancel.prevent="closeMenu"
         >
           <div class="site-header__menu-top">
-            <p class="site-header__menu-label">Світ V.I.Pet</p>
+            <p
+              class="site-header__menu-label"
+              tabindex="-1"
+              autofocus
+            >
+              Світ V.I.Pet
+            </p>
             <button
               type="button"
               class="site-header__menu-trigger"
@@ -216,7 +222,6 @@ const openMenu = () => {
   const dialog = menu.value;
   if (!dialog || dialog.open) return;
   dialog.showModal();
-  dialog.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     menuAnimation = dialog.animate(
       [
@@ -503,6 +508,7 @@ onBeforeUnmount(() => {
   }
 
   &__menu-label {
+    outline: none;
     position: relative;
     margin: 0;
     color: #e5c779;
@@ -617,6 +623,22 @@ onBeforeUnmount(() => {
     min-height: 52px;
     padding-inline: 1rem;
     font-size: 1.375rem;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .site-header__inner {
+    animation: header-entrance 1s ease-out backwards;
+
+    &:focus-within {
+      animation: none;
+    }
+  }
+}
+
+@keyframes header-entrance {
+  from {
+    opacity: 0;
+    translate: 0 -12px;
   }
 }
 </style>

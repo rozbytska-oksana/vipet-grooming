@@ -464,7 +464,6 @@ watch(
   padding-block: clamp(2rem, 3vw, 3rem);
   background: radial-gradient(ellipse at 10% 60%, rgb(199 166 104 / 7%), transparent 55%), #29292b;
   color: #f6f2e9;
-  scroll-margin-top: 1.5rem;
 
   &__heading {
     text-align: center;

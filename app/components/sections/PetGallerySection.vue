@@ -50,7 +50,10 @@
               v-for="(item, index) in groomingVideos"
               :key="item.id"
               class="pet-gallery__slide"
-              :class="{ 'pet-gallery__slide--active': selected === index }"
+              :class="{
+                'pet-gallery__slide--active': selected === index,
+                'pet-gallery__slide--nearby': isNearby(index),
+              }"
               role="group"
               aria-roledescription="слайд"
               :aria-label="`${index + 1} із ${groomingVideos.length}: ${item.title}`"
@@ -60,7 +63,7 @@
                   :src="item.src"
                   :poster="item.poster"
                   :title="item.title"
-                  @play="onPlay(index)"
+                  @play="onPlay(index, $event)"
                 />
               </div>
             </figure>
@@ -84,6 +87,7 @@
           </button>
           <div
             class="pet-gallery__dots"
+            role="group"
             aria-label="Обрати відео"
           >
             <button
@@ -138,6 +142,10 @@ const section = ref<HTMLElement | null>(null);
 const reduced = useReducedMotion();
 useScrollReveal(section);
 const selected = ref(0);
+const isNearby = (index: number) => {
+  const distance = Math.abs(selected.value - index);
+  return Math.min(distance, groomingVideos.length - distance) <= 2;
+};
 const visibleDots = computed(() => {
   const count = Math.min(5, groomingVideos.length);
   const start = Math.max(0, Math.min(selected.value - 2, groomingVideos.length - count));
@@ -160,17 +168,19 @@ const options = computed(() => ({
   },
 }));
 const [viewport, api] = emblaCarouselVue(options);
-const players = () => section.value?.querySelectorAll<HTMLVideoElement>('video');
-const pause = (except = -1) =>
-  players()?.forEach((player, index) => {
-    if (index !== except) player.pause();
-  });
+let playingVideo: HTMLVideoElement | null = null;
+let playingIndex = -1;
+const pause = (except = -1) => {
+  if (playingIndex !== except && playingVideo && !playingVideo.paused) playingVideo.pause();
+};
 const update = () => {
   selected.value = api.value?.selectedScrollSnap() ?? 0;
   pause(selected.value);
 };
-const onPlay = (index: number) => {
+const onPlay = (index: number, player: HTMLVideoElement) => {
   pause(index);
+  playingVideo = player;
+  playingIndex = index;
   api.value?.scrollTo(index, reduced.value);
 };
 watch(api, (value, previous) => {
@@ -193,6 +203,7 @@ onMounted(() => {
 });
 onBeforeUnmount(() => {
   pause();
+  playingVideo = null;
   observer?.disconnect();
   document.removeEventListener('visibilitychange', onVisibility);
   api.value?.off('select', update).off('reInit', update);
@@ -203,7 +214,6 @@ onBeforeUnmount(() => {
 @use '../../assets/styles/breakpoints' as bp;
 .pet-gallery {
   padding-block: clamp(2.5rem, 4vw, 4rem);
-  scroll-margin-top: 1.5rem;
   overflow: clip;
   background: radial-gradient(ellipse at 50% 35%, rgb(199 166 104 / 9%), transparent 65%), #29292b;
   color: #f6f2e9;
@@ -355,6 +365,10 @@ onBeforeUnmount(() => {
   }
 
   @media (prefers-reduced-motion: no-preference) {
+    &__slide--nearby &__frame {
+      will-change: transform;
+    }
+
     &__frame {
       transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
     }

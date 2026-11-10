@@ -1,11 +1,12 @@
 <template>
   <div class="grooming-video">
     <video
+      v-if="loaded"
       ref="video"
       class="grooming-video__player"
-      :src="loaded ? `${baseURL}${src}` : undefined"
-      :poster="loaded ? `${baseURL}${poster}-768.webp` : undefined"
-      :controls="loaded"
+      :src="`${baseURL}${src}`"
+      :poster="`${baseURL}${poster}-768.webp`"
+      controls
       preload="none"
       playsinline
       :aria-label="title"
@@ -32,6 +33,7 @@
     <a
       v-if="!loaded || failed"
       class="grooming-video__cover"
+      draggable="false"
       :href="`${baseURL}${src}`"
       :aria-label="`Відтворити відео: ${title}`"
       @click="start"
@@ -72,7 +74,7 @@
 import { nextTick, ref } from 'vue';
 
 defineProps<{ src: string; poster: string; title: string }>();
-const emit = defineEmits<{ play: [] }>();
+const emit = defineEmits<{ play: [player: HTMLVideoElement] }>();
 const baseURL = useRuntimeConfig().app.baseURL;
 const loaded = ref(false);
 const failed = ref(false);
@@ -81,7 +83,7 @@ const video = ref<HTMLVideoElement | null>(null);
 const sizes = '(min-width: 1200px) 28vw, (min-width: 768px) 40vw, 78vw';
 const onPlay = () => {
   playing.value = true;
-  emit('play');
+  if (video.value) emit('play', video.value);
 };
 const togglePlayback = async () => {
   const player = video.value;
