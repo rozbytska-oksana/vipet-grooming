@@ -40,7 +40,7 @@ describe('site SEO configuration', () => {
       openingHoursSpecification: [{ opens: '10:00', closes: '17:00' }],
     });
     const services = schema['@graph'].filter((item) => item['@type'] === 'Service');
-    expect(services).toHaveLength(5);
+    expect(services).toHaveLength(6);
     services.forEach((service) => {
       expect(service).toHaveProperty('provider', { '@id': 'https://example.test/#business' });
     });

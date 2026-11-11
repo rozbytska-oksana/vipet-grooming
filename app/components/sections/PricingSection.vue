@@ -160,7 +160,6 @@
                 >
                   {{ breed.label }}
                 </option>
-                <option value="other">Інша порода / не знаю</option>
               </select>
             </label>
             <label
@@ -260,6 +259,12 @@
                 </p>
               </Transition>
             </div>
+            <p
+              v-if="duration"
+              class="pricing__duration"
+            >
+              Орієнтовно {{ duration }} год.
+            </p>
             <span
               v-if="estimate.range"
               class="pricing__result-note"
@@ -269,12 +274,6 @@
           </div>
         </div>
         <div class="pricing__actions">
-          <p
-            v-if="duration"
-            class="pricing__duration"
-          >
-            Орієнтовна тривалість: {{ duration }} год.
-          </p>
           <BaseButton
             class="pricing__booking"
             :disabled="!breedId"
@@ -292,12 +291,13 @@
             відсутніх у прайсі поєднань вартість уточнюється індивідуально.
           </li>
           <li>
-            Вичісування ковтунів — {{ priceCatalog.policies.dematting.hourlyMinor / 100 }} грн/год
+            Вичісування ковтунів —
+            <strong>{{ priceCatalog.policies.dematting.hourlyMinor / 100 }} грн/год</strong>
             із похвилинним розрахунком.
           </li>
           <li>
             За виражену агресивну поведінку собаки — доплата
-            {{ priceCatalog.policies.dogAggressionSurchargeMinor / 100 }} грн.
+            <strong>{{ priceCatalog.policies.dogAggressionSurchargeMinor / 100 }} грн.</strong>
           </li>
           <li>
             Знижки й доплати наведені для ознайомлення та не застосовуються автоматично до
@@ -305,7 +305,7 @@
           </li>
         </ul>
         <h3 class="pricing__discount-title">Знижки та спеціальні пропозиції</h3>
-        <ul class="pricing__discounts">
+        <ul>
           <li
             v-for="discount in discounts"
             :key="discount.id"
@@ -379,15 +379,18 @@ const resetBreed = () => {
 const needsWeight = computed(
   () =>
     petType.value === 'dog' &&
-    !!selectedBreed.value &&
-    (serviceId.value === 'bath' || selectedBreed.value.group === 'mixed'),
+    !!selectedBreed.value?.group &&
+    (serviceId.value === 'bath' ||
+      (selectedBreed.value.group === 'mixed' && ['hygiene', 'complex'].includes(serviceId.value))),
 );
 const needsCoat = computed(
-  () => selectedBreed.value?.group === 'large' && serviceId.value === 'complex',
+  () =>
+    selectedBreed.value?.group === 'large' &&
+    ['complex', 'express-shedding'].includes(serviceId.value),
 );
 const selection = computed<PricingSelection>(() => ({
   petType: petType.value,
-  breedId: breedId.value === 'other' ? null : breedId.value || null,
+  breedId: breedId.value || null,
   serviceId: serviceId.value || null,
   extraIds: [],
   weightBand: needsWeight.value && weightBand.value !== 'other' ? weightBand.value || null : null,
@@ -407,10 +410,18 @@ const priceText = computed(() => {
   return `${min}${value.range.minMinor === value.range.maxMinor ? '' : `–${money.format(value.range.maxMinor / 100)}`} грн`;
 });
 const duration = computed(() => {
-  if (selectedBreed.value?.group !== 'large' || serviceId.value !== 'complex') return null;
-  const value = priceCatalog.largeBreedDurations.find(
-    (item) => item.label === selectedBreed.value?.label,
-  );
+  if (!selectedBreed.value || selectedBreed.value.id === 'dog-other') return null;
+  const breedDuration =
+    selectedBreed.value.group === 'large' &&
+    ['complex', 'express-shedding'].includes(serviceId.value)
+      ? priceCatalog.largeBreedDurations.find((item) => item.label === selectedBreed.value?.label)
+      : null;
+  const serviceDuration = services.find((item) => item.id === serviceId.value)?.durationMinutes;
+  const value =
+    breedDuration ??
+    (serviceDuration
+      ? { minHours: serviceDuration.min / 60, maxHours: serviceDuration.max / 60 }
+      : null);
   return value
     ? `${money.format(value.minHours)}${value.minHours === value.maxHours ? '' : `–${money.format(value.maxHours)}`}`
     : null;
@@ -597,6 +608,8 @@ const duration = computed(() => {
   }
   &__conditions {
     display: grid;
+    margin: -0.5rem;
+    padding: 0.5rem;
     overflow: hidden;
     small {
       font-size: 1rem;
@@ -621,16 +634,17 @@ const duration = computed(() => {
     font-size: 1.25rem;
   }
   &__duration {
-    margin: 0 auto 0 0;
+    margin: 0 0 1rem;
     font-size: 1rem;
-    color: var(--color-silver);
+    line-height: 1.4;
+    color: var(--color-gold-highlight);
   }
   &__discount-title {
     margin: 1.5rem 0 0;
     font: 400 1.75rem / 1.1 var(--font-editorial);
     color: var(--color-ivory);
   }
-  &__discounts strong {
+  &__notes strong {
     color: var(--color-gold-highlight);
     font-weight: 600;
   }

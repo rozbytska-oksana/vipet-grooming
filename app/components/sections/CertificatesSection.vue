@@ -24,11 +24,13 @@
           :class="{
             'certificates__slide--landscape': item.width > item.height,
             'certificates__slide--active': selected === index,
+            'certificates__slide--nearby': isNearby(index),
           }"
         >
           <a
             :href="`${baseURL}${item.fullSrc}`"
             class="certificates__frame"
+            draggable="false"
             :aria-label="`Збільшити: ${item.caption}`"
             @click="open($event, item)"
           >
@@ -48,6 +50,7 @@
                 :alt="item.alt"
                 :width="item.width"
                 :height="item.height"
+                draggable="false"
                 loading="lazy"
                 fetchpriority="low"
                 decoding="async"
@@ -185,6 +188,7 @@ import emblaCarouselVue from 'embla-carousel-vue';
 import BaseIcon from '../ui/BaseIcon.vue';
 import { certificates } from '../../data/certificates';
 import type { MediaItem } from '../../types/content';
+import { useCarouselImages } from '../../composables/useCarouselImages';
 import { useReducedMotion } from '../../composables/useReducedMotion';
 const baseURL = useRuntimeConfig().app.baseURL;
 const reduced = useReducedMotion();
@@ -198,6 +202,15 @@ const [viewport, api] = emblaCarouselVue(
     duration: reduced.value ? 0 : 35,
   })),
 );
+useCarouselImages(viewport);
+const settled = ref(0);
+const isNearby = (index: number) => {
+  const distance = Math.abs(settled.value - index);
+  return Math.min(distance, certificates.length - distance) <= 2;
+};
+const onSettle = () => {
+  settled.value = api.value?.selectedScrollSnap() ?? 0;
+};
 const selected = ref(0),
   snaps = ref<number[]>([]),
   canPrevious = ref(false),
@@ -208,8 +221,9 @@ const update = () => {
   canPrevious.value = api.value?.canScrollPrev() ?? false;
   canNext.value = api.value?.canScrollNext() ?? false;
 };
-watch(api, (value) => {
-  value?.on('select', update).on('reInit', update);
+watch(api, (value, previous) => {
+  previous?.off('select', update).off('reInit', update).off('settle', onSettle);
+  value?.on('select', update).on('reInit', update).on('settle', onSettle);
   update();
 });
 const sizes = '(min-width: 1200px) 15vw, (min-width: 768px) 34vw, 68vw';
@@ -301,7 +315,7 @@ onBeforeUnmount(() => {
     dialog.value.close();
     restore();
   }
-  api.value?.off('select', update).off('reInit', update);
+  api.value?.off('select', update).off('reInit', update).off('settle', onSettle);
 });
 </script>
 
@@ -350,6 +364,11 @@ onBeforeUnmount(() => {
           transform: none;
         }
       }
+    }
+  }
+  &__slide--nearby &__frame {
+    @media (prefers-reduced-motion: no-preference) {
+      will-change: transform;
     }
   }
   &__frame {

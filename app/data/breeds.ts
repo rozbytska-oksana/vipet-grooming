@@ -18,6 +18,7 @@ export const breeds: readonly Breed[] = [
     petType: 'dog',
     group: 'large',
   })),
+  { id: 'dog-other', label: 'Інша порода', petType: 'dog' },
   { id: 'cat-general', label: 'Кіт / кішка (крім мейн-куна)', petType: 'cat' },
   { id: 'maine-coon', label: 'Мейн-кун', petType: 'cat' },
 ];

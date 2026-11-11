@@ -70,6 +70,12 @@
           <div class="service-card__body">
             <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
+            <p
+              v-if="item.id === 'express-shedding'"
+              class="service-card__price-scope"
+            >
+              Для великих порід
+            </p>
             <p class="service-card__price">{{ formatServicePrice(item.id) }}</p>
             <BaseButton
               href="#pricing"
@@ -97,7 +103,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
 useScrollReveal(section, { duration: 900, fromOpacity: 0, easing: 'ease-out' });
 const cards = serviceCards;
 const imageSizes =
-  '(min-width: 1200px) calc((min(100vw, 90rem) - clamp(5rem, 8vw, 10rem) - clamp(3rem, 5vw, 5rem) - 10px) / 5), (min-width: 768px) calc((100vw - 4rem - clamp(1.5rem, 2.5vw, 2.5rem) - 6px) / 3), calc(100vw - 2.5rem - 2px)';
+  '(min-width: 1200px) calc((min(100vw, 90rem) - clamp(5rem, 8vw, 10rem) - clamp(1.5rem, 2.5vw, 2.5rem) - 6px) / 3), (min-width: 768px) calc((100vw - 4rem - clamp(1.5rem, 2.5vw, 2.5rem) - 6px) / 3), calc(100vw - 2.5rem - 2px)';
 </script>
 
 <style scoped lang="scss">
@@ -148,11 +154,15 @@ const imageSizes =
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     @include bp.x-large {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 }
 .service-card {
+  &__price-scope {
+    font-size: 1rem;
+  }
+
   position: relative;
 
   &::after {

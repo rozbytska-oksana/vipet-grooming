@@ -13,7 +13,7 @@ const valid: BookingFields = {
   contact: '@pet_owner',
   comment: '',
 };
-const breeds = ['maltipoo', 'other'];
+const breeds = ['maltipoo'];
 
 describe('booking validation', () => {
   it('accepts Ukrainian names and a valid selected breed', () => {
@@ -30,10 +30,10 @@ describe('booking validation', () => {
     ).toEqual(['breedId', 'contact', 'customerName', 'petName']);
   });
   it('rejects a breed from the previous pet type', () => {
-    expect(validateBooking(valid, ['cat-general', 'other']).breedId).toBeTruthy();
+    expect(validateBooking(valid, ['cat-general']).breedId).toBeTruthy();
   });
-  it('allows the explicit unknown-breed option', () => {
-    expect(validateBooking({ ...valid, breedId: 'other' }, breeds)).toEqual({});
+  it('rejects an unknown breed outside the available options', () => {
+    expect(validateBooking({ ...valid, breedId: 'other' }, breeds).breedId).toBeTruthy();
   });
   it.each([
     ['telegram', '+380 (63) 123-45-67'],

@@ -52,6 +52,12 @@
           <p class="booking__description">
             Оберіть догляд і зручний канал зв’язку. Дату, час та деталі візиту погодимо окремо.
           </p>
+          <a
+            class="booking__rules-link"
+            href="#salon-rules"
+          >
+            Правила салону
+          </a>
           <p
             id="booking-unavailable"
             class="booking__notice"
@@ -167,7 +173,6 @@
               >
                 {{ breed.label }}
               </option>
-              <option value="other">Інша порода / не знаю</option>
             </select>
             <span
               v-if="error('breedId')"
@@ -394,7 +399,10 @@ const fields = computed(() => ({
   comment: comment.value,
 }));
 const errors = computed(() =>
-  validateBooking(fields.value, [...availableBreeds.value.map((item) => item.id), 'other']),
+  validateBooking(
+    fields.value,
+    availableBreeds.value.map((item) => item.id),
+  ),
 );
 const error = (field: BookingField) =>
   submitted.value || touched.value[field] ? errors.value[field] : undefined;
@@ -526,6 +534,13 @@ watch(
     margin: 0 0 1.5rem;
     font-size: 1.125rem;
     color: #d1ceca;
+  }
+  &__rules-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-gold-highlight);
+    text-underline-offset: 0.2em;
   }
   &__notice {
     max-width: 46ch;

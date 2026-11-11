@@ -7,6 +7,7 @@ export const priceCatalog = catalog;
 export function getServicePriceRange(id: string): PriceRange | null {
   const entries = catalog.entries.filter((entry) => {
     if (entry.unit !== 'procedure') return false;
+    if (id === 'express-shedding') return entry.id.startsWith('large-');
     if (id === 'dogs') return entry.service === 'complex';
     if (id === 'hygiene') return entry.service === 'hygiene';
     if (id === 'cats') return entry.group === 'cats';

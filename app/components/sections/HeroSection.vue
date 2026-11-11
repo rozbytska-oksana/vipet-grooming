@@ -91,8 +91,8 @@
         </h1>
         <p class="hero__lead">
           <span>Професійний грумінг у Житомирі,</span>
-          <span>де турбота, краса та комфорт</span>
-          <span>поєднуються в преміальному догляді</span>
+          <span>де дбають про красу й комфорт</span>
+          <span>вашого улюбленця.</span>
         </p>
       </div>
 
@@ -875,6 +875,7 @@ useHead({
 
 @keyframes hero-image-in {
   from {
+    opacity: 0;
     translate: 0 16px;
   }
 }

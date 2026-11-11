@@ -319,12 +319,16 @@ onBeforeUnmount(() => {
   }
 
   &__brand {
-    display: grid;
+    display: block;
     flex: 0 0 auto;
-    justify-items: center;
+    width: 5rem;
     padding-block: 0.25rem;
     color: var(--color-ivory);
     text-decoration: none;
+
+    @include bp.medium {
+      width: 6.5rem;
+    }
   }
 
   &__desktop-nav {

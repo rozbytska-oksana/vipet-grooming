@@ -142,7 +142,7 @@ cold-cache, із затриманими fonts/images та поступовим H
   єдині width-breakpoints — _breakpoints.scss. Не створювати паралельний _tokens.scss.
 - public/images — approved production images; originals не публікувати автоматично.
 - Поточний порядок DOM: Hero, Services, Groomer (із Certificates), BeforeAfter,
-  Pricing, Philosophy, PetGallery, Testimonials, Booking, FAQ, Contacts/Footer.
+  Pricing, Philosophy, PetGallery, Testimonials, Booking, BeforeVisit, SalonRules, FAQ, Contacts/Footer.
   Philosophy об’єднує підхід і цінності колишнього WhyChooseUs.
 - Gold pill CTA відповідає reference; без стрілок. Mobile device frames не UI.
 - UI/layout/sections імпортувати явно; не залежати від folder-prefix auto-import names.

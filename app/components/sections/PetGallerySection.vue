@@ -135,6 +135,7 @@ import BaseContainer from '../ui/BaseContainer.vue';
 import GroomingVideoCard from '../gallery/GroomingVideoCard.vue';
 import { groomingVideos } from '../../data/grooming-videos';
 import { business } from '../../data/salon';
+import { useCarouselImages } from '../../composables/useCarouselImages';
 import { useReducedMotion } from '../../composables/useReducedMotion';
 import { useScrollReveal } from '../../composables/useScrollReveal';
 
@@ -142,8 +143,9 @@ const section = ref<HTMLElement | null>(null);
 const reduced = useReducedMotion();
 useScrollReveal(section);
 const selected = ref(0);
+const settled = ref(0);
 const isNearby = (index: number) => {
-  const distance = Math.abs(selected.value - index);
+  const distance = Math.abs(settled.value - index);
   return Math.min(distance, groomingVideos.length - distance) <= 2;
 };
 const visibleDots = computed(() => {
@@ -168,6 +170,10 @@ const options = computed(() => ({
   },
 }));
 const [viewport, api] = emblaCarouselVue(options);
+useCarouselImages(viewport);
+const onSettle = () => {
+  settled.value = api.value?.selectedScrollSnap() ?? 0;
+};
 let playingVideo: HTMLVideoElement | null = null;
 let playingIndex = -1;
 const pause = (except = -1) => {
@@ -184,8 +190,8 @@ const onPlay = (index: number, player: HTMLVideoElement) => {
   api.value?.scrollTo(index, reduced.value);
 };
 watch(api, (value, previous) => {
-  previous?.off('select', update).off('reInit', update);
-  value?.on('select', update).on('reInit', update);
+  previous?.off('select', update).off('reInit', update).off('settle', onSettle);
+  value?.on('select', update).on('reInit', update).on('settle', onSettle);
   update();
 });
 let observer: IntersectionObserver | undefined;
@@ -206,7 +212,7 @@ onBeforeUnmount(() => {
   playingVideo = null;
   observer?.disconnect();
   document.removeEventListener('visibilitychange', onVisibility);
-  api.value?.off('select', update).off('reInit', update);
+  api.value?.off('select', update).off('reInit', update).off('settle', onSettle);
 });
 </script>
 

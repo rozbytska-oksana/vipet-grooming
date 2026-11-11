@@ -9,6 +9,7 @@ export const services: readonly Service[] = [
     petTypes: ['dog'],
     inclusions: priceCatalog.inclusions.smallMedium,
     mediaId: null,
+    durationMinutes: { min: 150, max: 180 },
   },
   {
     id: 'hygiene',
@@ -39,6 +40,14 @@ export const services: readonly Service[] = [
     title: 'Вичісування та купання',
     description: 'Вичісування та купання кішки.',
     petTypes: ['cat'],
+    inclusions: [],
+    mediaId: null,
+  },
+  {
+    id: 'express-shedding',
+    title: 'Експрес-линька',
+    description: 'Догляд під час линьки та вичісування підшерстка.',
+    petTypes: ['dog'],
     inclusions: [],
     mediaId: null,
   },

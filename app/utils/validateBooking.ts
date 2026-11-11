@@ -39,8 +39,7 @@ export function validateBooking(fields: BookingFields, breedIds: readonly string
   }
   if (!fields.petName.trim() || fields.petName.trim().length > 100)
     errors.petName = 'Вкажіть ім’я улюбленця — до 100 символів.';
-  if (!breedIds.includes(fields.breedId))
-    errors.breedId = 'Оберіть породу або «Інша порода / не знаю».';
+  if (!breedIds.includes(fields.breedId)) errors.breedId = 'Оберіть породу.';
   const value = fields.contact.trim();
   const handle = value.replace(/^@/, '');
   let valid = false;

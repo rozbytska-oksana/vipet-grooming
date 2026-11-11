@@ -12,8 +12,10 @@
       <PricingSection @booking="prefillBooking" />
       <PhilosophySection />
       <PetGallerySection :hydrate-on-visible="{ rootMargin: '300px' }" />
-      <TestimonialsSection :hydrate-on-visible="{ rootMargin: '300px' }" />
+      <BeforeVisitSection />
       <BookingSection :prefill="selection" />
+      <TestimonialsSection :hydrate-on-visible="{ rootMargin: '300px' }" />
+      <SalonRulesSection />
       <FaqSection />
     </main>
     <SiteFooter />
@@ -53,6 +55,8 @@ const TestimonialsSection = defineLazyHydrationComponent(
   () => import('../components/sections/TestimonialsSection.vue'),
 );
 import FaqSection from '../components/sections/FaqSection.vue';
+import BeforeVisitSection from '../components/sections/BeforeVisitSection.vue';
+import SalonRulesSection from '../components/sections/SalonRulesSection.vue';
 import BookingSection from '../components/sections/BookingSection.vue';
 const selection = ref<PricingSelection | null>(null);
 const openBooking = () => {

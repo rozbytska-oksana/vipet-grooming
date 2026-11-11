@@ -144,11 +144,6 @@ useScrollReveal(section);
     border-bottom: 1px solid rgb(181 151 75 / 40%);
     background: transparent;
 
-    &[open] {
-      border-color: #b5974b;
-      background: transparent;
-    }
-
     & :deep(summary) {
       display: flex;
       justify-content: space-between;
@@ -220,22 +215,12 @@ useScrollReveal(section);
   }
 
   @media (hover: hover) {
-    &__item:hover {
-      border-color: #b5974b;
-    }
-
     &__item:hover svg {
       color: #715323;
     }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    &__item {
-      transition:
-        border-color 250ms,
-        background-color 250ms;
-    }
-
     &__item svg {
       transition: transform 350ms ease;
     }

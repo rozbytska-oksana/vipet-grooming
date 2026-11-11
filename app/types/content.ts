@@ -7,6 +7,7 @@ export interface Service {
   petTypes: readonly PetType[];
   inclusions: readonly string[];
   mediaId: string | null;
+  durationMinutes?: { min: number; max: number };
 }
 
 export type CoatLength = 'short' | 'medium' | 'long';
