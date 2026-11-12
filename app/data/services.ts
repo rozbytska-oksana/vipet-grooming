@@ -9,7 +9,7 @@ export const services: readonly Service[] = [
     petTypes: ['dog'],
     inclusions: priceCatalog.inclusions.smallMedium,
     mediaId: null,
-    durationMinutes: { min: 150, max: 180 },
+    durationMinutes: { min: 120, max: 120 },
   },
   {
     id: 'express-shedding',
