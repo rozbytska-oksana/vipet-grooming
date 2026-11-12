@@ -1,6 +1,16 @@
 import type { MediaItem } from '../types/content';
 export const certificates: readonly (MediaItem & { date: string })[] = [
   {
+    id: 'universal-shape',
+    date: '2026-11-08',
+    caption: 'Грумінг мальтіпу F1 та F2 — секрети універсальної форми',
+    alt: 'Сертифікат Оксани Онищук: Грумінг мальтіпу F1 та F2 — секрети універсальної форми з практичним відпрацюванням',
+    width: 1044,
+    height: 1506,
+    src: 'images/certificates/universal-shape-v2-960.webp',
+    fullSrc: 'images/certificates/universal-shape-v2-full.webp',
+  },
+  {
     id: 'round-forms',
     date: '2026-09-29',
     caption: 'Секрети круглих форм на спадаючому типі шерсті',
@@ -15,10 +25,10 @@ export const certificates: readonly (MediaItem & { date: string })[] = [
     date: '2025-12-05',
     caption: 'Основи салонного грумінгу — рівень 2',
     alt: 'Сертифікат Оксани Онищук: Основи салонного грумінгу — рівень 2',
-    width: 3686,
-    height: 5317,
-    src: 'images/certificates/junior-960.webp',
-    fullSrc: 'images/certificates/junior-full.webp',
+    width: 1878,
+    height: 2800,
+    src: 'images/certificates/junior-v2-960.webp',
+    fullSrc: 'images/certificates/junior-v2-full.webp',
   },
   {
     id: 'legal',

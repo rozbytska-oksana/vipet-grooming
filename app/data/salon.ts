@@ -39,6 +39,6 @@ export const groomer = {
 // Confirmed by the owner on 2026-11-06; edit values here to update the counters.
 export const statistics: readonly Statistic[] = [
   { id: 'experience', value: 3, suffix: '+', label: 'років досвіду' },
-  { id: 'education', value: 7, suffix: '+', label: 'професійних навчань' },
+  { id: 'education', value: 8, suffix: '+', label: 'професійних навчань' },
   { id: 'pets', value: 1000, suffix: '+', label: 'улюбленців' },
 ];

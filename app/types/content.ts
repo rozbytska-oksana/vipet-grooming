@@ -34,6 +34,7 @@ export interface PriceRule {
   range: PriceRange | null;
   eligibleExtraIds: readonly string[];
   adjustmentNotes: readonly string[];
+  billingUnit?: 'hour';
   coatLength?: CoatLength;
   weightBand?: WeightBand;
 }

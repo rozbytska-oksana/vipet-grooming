@@ -13,6 +13,8 @@ describe('owner-provided service prices', () => {
     ['cats', 70000, 140000],
     ['bath', 60000, 80000],
     ['details', 10000, 25000],
+    ['express-shedding', 90000, 110000],
+    ['express-shedding-hourly', 110000, 120000],
   ])('summarizes %s base prices without conditional fees', (id, min, max) => {
     expect(getServicePriceRange(id as string)).toEqual({
       minMinor: min,

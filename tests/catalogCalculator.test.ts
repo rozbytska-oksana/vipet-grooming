@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { breeds } from '../app/data/breeds';
+import { priceCatalog } from '../app/data/service-prices';
 import { services } from '../app/data/services';
 import { pricingRules, serviceExtras } from '../app/data/pricing';
 import { calculatePrice } from '../app/utils/calculatePrice';
@@ -65,19 +66,30 @@ describe('confirmed catalog calculator', () => {
     });
     expect(price({ breedId: 'large-0', serviceId: 'hygiene' }).status).toBe('quote-required');
   });
-  it('uses confirmed large-breed express shedding prices and quotes other dogs', () => {
+  it('uses confirmed fixed and hourly express shedding prices', () => {
     for (const breed of breeds.filter((item) => item.petType === 'dog')) {
       const rules = pricingRules.filter(
         (rule) => rule.breedId === breed.id && rule.serviceId === 'express-shedding',
       );
       expect(rules).toHaveLength(breed.group === 'large' ? 3 : 1);
+      const fixed = priceCatalog.entries.find(
+        (entry) => entry.id === `${breed.id}-complex` && entry.group === 'small-medium-short',
+      );
       expect(
         price({
           petType: breed.petType,
           breedId: breed.id,
           serviceId: 'express-shedding',
         }).status,
-      ).toBe('quote-required');
+      ).toBe(fixed ? 'available' : 'quote-required');
+      if (fixed) {
+        expect(price({ breedId: breed.id, serviceId: 'express-shedding' }).range).toEqual(
+          fixed.range,
+        );
+        expect(price({ breedId: breed.id, serviceId: 'express-shedding' })).not.toHaveProperty(
+          'billingUnit',
+        );
+      }
       if (breed.group === 'large') {
         for (const coatLength of ['short', 'medium', 'long'] as const) {
           expect(
@@ -91,6 +103,45 @@ describe('confirmed catalog calculator', () => {
         }
       }
     }
+  });
+  it.each([
+    ['french-bulldog', 1000],
+    ['english-bulldog', 1000],
+    ['pug', 1000],
+    ['beagle', 1100],
+    ['dachshund', 1000],
+    ['toy-terrier', 900],
+    ['chihuahua', 900],
+    ['jack-russell', 1000],
+  ])('matches the confirmed fixed express-shedding tariff for %s', (breedId, amount) => {
+    expect(price({ breedId: breedId as string, serviceId: 'express-shedding' })).toEqual({
+      status: 'available',
+      range: { minMinor: Number(amount) * 100, maxMinor: Number(amount) * 100, currency: 'UAH' },
+    });
+  });
+  it('returns an hourly rate for every large-breed coat category', () => {
+    for (const breed of breeds.filter((item) => item.group === 'large')) {
+      for (const coatLength of ['short', 'medium', 'long'] as const) {
+        const amount = coatLength === 'short' ? 110000 : 120000;
+        expect(price({ breedId: breed.id, serviceId: 'express-shedding', coatLength })).toEqual({
+          status: 'available',
+          billingUnit: 'hour',
+          range: { minMinor: amount, maxMinor: amount, currency: 'UAH' },
+        });
+      }
+    }
+  });
+  it('returns an hourly rate for large-breed express shedding only', () => {
+    expect(
+      price({ breedId: 'large-0', serviceId: 'express-shedding', coatLength: 'short' }),
+    ).toMatchObject({
+      status: 'available',
+      billingUnit: 'hour',
+      range: { minMinor: 110000, maxMinor: 110000 },
+    });
+    expect(
+      price({ breedId: 'large-0', serviceId: 'complex', coatLength: 'short' }),
+    ).not.toHaveProperty('billingUnit');
   });
   it('excludes express shedding for cats', () => {
     expect(services.find((service) => service.id === 'express-shedding')?.petTypes).toEqual([
@@ -115,7 +166,13 @@ describe('confirmed catalog calculator', () => {
     expect(new Set(pricingRules.map((rule) => rule.id)).size).toBe(pricingRules.length);
     for (const rule of pricingRules) {
       expect(rule.range === null).toBe(
-        rule.breedId === 'dog-other' || (rule.serviceId === 'express-shedding' && !rule.coatLength),
+        rule.breedId === 'dog-other' ||
+          (rule.serviceId === 'express-shedding' &&
+            !rule.coatLength &&
+            !priceCatalog.entries.some(
+              (entry) =>
+                entry.id === `${rule.breedId}-complex` && entry.group === 'small-medium-short',
+            )),
       );
       expect(breeds.some((breed) => breed.id === rule.breedId)).toBe(true);
     }

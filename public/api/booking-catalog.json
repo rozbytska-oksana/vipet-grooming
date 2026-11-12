@@ -7,9 +7,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -19,9 +19,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -31,9 +31,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -43,9 +43,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -55,9 +55,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -67,9 +67,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -79,9 +79,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -91,9 +91,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -103,9 +103,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -115,9 +115,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -127,9 +127,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -139,9 +139,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -151,9 +151,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -163,9 +163,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -175,9 +175,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -187,9 +187,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -199,9 +199,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -211,9 +211,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -223,9 +223,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -235,9 +235,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -247,9 +247,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -259,9 +259,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -271,9 +271,9 @@
       "group": "regular",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -283,9 +283,9 @@
       "group": "mixed",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -295,8 +295,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -306,8 +306,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -317,8 +317,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -328,8 +328,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -339,8 +339,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -350,8 +350,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -361,8 +361,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -372,8 +372,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -383,8 +383,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -394,8 +394,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -405,8 +405,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -416,8 +416,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -427,8 +427,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -438,8 +438,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -449,8 +449,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -460,8 +460,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -471,8 +471,8 @@
       "group": "large",
       "serviceIds": [
         "complex",
-        "bath",
-        "express-shedding"
+        "express-shedding",
+        "bath"
       ]
     },
     {
@@ -481,9 +481,9 @@
       "petType": "dog",
       "serviceIds": [
         "complex",
+        "express-shedding",
         "hygiene",
-        "bath",
-        "express-shedding"
+        "bath"
       ]
     },
     {
@@ -515,6 +515,13 @@
       ]
     },
     {
+      "id": "express-shedding",
+      "title": "Експрес-линька",
+      "petTypes": [
+        "dog"
+      ]
+    },
+    {
       "id": "hygiene",
       "title": "Гігієнічний догляд",
       "petTypes": [
@@ -541,13 +548,6 @@
       "title": "Вичісування та купання",
       "petTypes": [
         "cat"
-      ]
-    },
-    {
-      "id": "express-shedding",
-      "title": "Експрес-линька",
-      "petTypes": [
-        "dog"
       ]
     }
   ],

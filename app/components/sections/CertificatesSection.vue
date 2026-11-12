@@ -37,12 +37,12 @@
             <picture>
               <source
                 type="image/avif"
-                :srcset="sources(item.id, 'avif')"
+                :srcset="sources(item.src, 'avif')"
                 :sizes="sizes"
               />
               <source
                 type="image/webp"
-                :srcset="sources(item.id, 'webp')"
+                :srcset="sources(item.src, 'webp')"
                 :sizes="sizes"
               />
               <img
@@ -227,8 +227,10 @@ watch(api, (value, previous) => {
   update();
 });
 const sizes = '(min-width: 1200px) 15vw, (min-width: 768px) 34vw, 68vw';
-const sources = (id: string, format: string) =>
-  [480, 960].map((w) => `${baseURL}images/certificates/${id}-${w}.${format} ${w}w`).join(', ');
+const sources = (src: string, format: string) =>
+  [480, 960]
+    .map((width) => `${baseURL}${src.replace('-960.webp', `-${width}.${format}`)} ${width}w`)
+    .join(', ');
 const dialog = ref<HTMLDialogElement | null>(null);
 const fullReady = ref(false);
 const active = ref<MediaItem | null>(null);
@@ -396,6 +398,10 @@ onBeforeUnmount(() => {
     display: block;
     width: 100%;
     height: auto;
+  }
+  &__slide--tone-corrected img,
+  &__expanded--tone-corrected img {
+    filter: contrast(1.45) brightness(0.9);
   }
   &__controls {
     display: flex;

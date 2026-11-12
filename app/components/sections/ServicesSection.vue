@@ -70,13 +70,25 @@
           <div class="service-card__body">
             <h3>{{ item.title }}</h3>
             <p>{{ item.description }}</p>
-            <p
+            <div
               v-if="item.id === 'express-shedding'"
-              class="service-card__price-scope"
+              class="service-card__prices"
             >
-              Для великих порід
+              <p class="service-card__price">
+                {{ formatServicePrice(item.id) }}
+                <small>(для дрібних порід)</small>
+              </p>
+              <p class="service-card__price">
+                {{ formatServicePrice('express-shedding-hourly') }}
+                <small>(для великих порід)</small>
+              </p>
+            </div>
+            <p
+              v-else
+              class="service-card__price"
+            >
+              {{ formatServicePrice(item.id) }}
             </p>
-            <p class="service-card__price">{{ formatServicePrice(item.id) }}</p>
             <BaseButton
               href="#pricing"
               class="service-card__button"
@@ -159,10 +171,6 @@ const imageSizes =
   }
 }
 .service-card {
-  &__price-scope {
-    font-size: 1rem;
-  }
-
   position: relative;
 
   &::after {
@@ -258,6 +266,19 @@ const imageSizes =
     color: var(--color-gold-ink);
     font: 500 1.5rem / 1.15 var(--font-editorial);
     font-variant-numeric: tabular-nums;
+  }
+  &__prices {
+    display: grid;
+    gap: 0.5rem;
+    margin: auto 0 0.75rem;
+    width: 100%;
+  }
+  &__prices &__price {
+    margin: 0;
+  }
+  &__price small {
+    color: var(--text-secondary);
+    font: 400 1rem / 1.4 var(--font-body);
   }
   &__button.base-button {
     width: 100%;

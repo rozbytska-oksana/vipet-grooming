@@ -269,7 +269,11 @@
               v-if="estimate.range"
               class="pricing__result-note"
             >
-              Базова ціна, без доплат і знижок
+              {{
+                estimate.status === 'available' && estimate.billingUnit === 'hour'
+                  ? 'Погодинний тариф. Підсумкова вартість залежить від тривалості.'
+                  : 'Базова ціна, без доплат і знижок'
+              }}
             </span>
           </div>
         </div>
@@ -407,7 +411,7 @@ const priceText = computed(() => {
   const value = estimate.value;
   if (value.status !== 'available') return 'Вартість уточнюється';
   const min = money.format(value.range.minMinor / 100);
-  return `${min}${value.range.minMinor === value.range.maxMinor ? '' : `–${money.format(value.range.maxMinor / 100)}`} грн`;
+  return `${min}${value.range.minMinor === value.range.maxMinor ? '' : `–${money.format(value.range.maxMinor / 100)}`} грн${value.billingUnit === 'hour' ? '/год' : ''}`;
 });
 const duration = computed(() => {
   if (!selectedBreed.value || selectedBreed.value.id === 'dog-other') return null;

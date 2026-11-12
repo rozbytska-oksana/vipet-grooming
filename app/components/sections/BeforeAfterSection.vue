@@ -287,7 +287,7 @@ onBeforeUnmount(() => {
   &__layout {
     display: grid;
     align-items: center;
-    gap: 1.75rem;
+    gap: 0.75rem;
     max-width: 68rem;
     margin-inline: auto;
     @include bp.medium {

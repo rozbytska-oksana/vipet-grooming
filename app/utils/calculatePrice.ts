@@ -9,7 +9,7 @@ import type {
 
 export type PriceEstimate =
   | { status: 'incomplete' | 'quote-required' | 'unavailable'; range: null }
-  | { status: 'available'; range: PriceRange };
+  | { status: 'available'; range: PriceRange; billingUnit?: 'hour' };
 
 const validRange = (range: PriceRange) =>
   range.currency === 'UAH' &&
@@ -69,5 +69,7 @@ export function calculatePrice(
       range.maxMinor += extra.pricing.range.maxMinor;
     }
   }
-  return validRange(range) ? { status: 'available', range } : result('unavailable');
+  return validRange(range)
+    ? { status: 'available', range, ...(rule.billingUnit ? { billingUnit: rule.billingUnit } : {}) }
+    : result('unavailable');
 }

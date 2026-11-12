@@ -11,7 +11,7 @@ const rule = (
   breedId: string,
   serviceId: string,
   entryId: string | null,
-  conditions: Partial<Pick<PriceRule, 'weightBand' | 'coatLength'>> = {},
+  conditions: Partial<Pick<PriceRule, 'weightBand' | 'coatLength' | 'billingUnit'>> = {},
 ): PriceRule => ({
   id: `${breedId}-${serviceId}-${entryId ?? 'quote'}`,
   petType: breeds.find((breed) => breed.id === breedId)!.petType,
@@ -64,7 +64,7 @@ const basePricingRules: readonly PriceRule[] = breeds.flatMap((breed) => {
   ];
 });
 
-// The owner confirmed the large-breed tariff for express shedding.
+// Confirmed express-shedding prices: short-coated small breeds per procedure, large breeds per hour.
 export const pricingRules: readonly PriceRule[] = [
   ...basePricingRules,
   ...breeds
@@ -72,9 +72,21 @@ export const pricingRules: readonly PriceRule[] = [
     .flatMap((breed) =>
       breed.group === 'large'
         ? (['short', 'medium', 'long'] as CoatLength[]).map((coat) =>
-            rule(breed.id, 'express-shedding', `large-${coat}`, { coatLength: coat }),
+            rule(breed.id, 'express-shedding', `large-${coat}`, {
+              coatLength: coat,
+              billingUnit: 'hour',
+            }),
           )
-        : [rule(breed.id, 'express-shedding', null)],
+        : [
+            rule(
+              breed.id,
+              'express-shedding',
+              priceCatalog.entries.find(
+                (entry) =>
+                  entry.id === `${breed.id}-complex` && entry.group === 'small-medium-short',
+              )?.id ?? null,
+            ),
+          ],
     ),
 ];
 
