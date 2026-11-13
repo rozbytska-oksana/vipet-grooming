@@ -59,7 +59,16 @@
             Правила салону
           </a>
           <p
-            id="booking-unavailable"
+            v-if="bookingUrl"
+            id="booking-notice"
+            class="booking__notice"
+          >
+            Заявка не є підтвердженим записом. Ми зв’яжемося з вами через обраний канал, щоб
+            погодити дату, час і вартість.
+          </p>
+          <p
+            v-else
+            id="booking-notice"
             class="booking__notice"
           >
             Онлайн-надсилання ще недоступне. Ви можете заповнити й перевірити форму — дані нікуди не
@@ -77,9 +86,11 @@
           ref="form"
           class="booking__form"
           aria-label="Заявка на догляд"
-          aria-describedby="booking-unavailable booking-required"
+          aria-describedby="booking-notice"
+          :aria-busy="sending || undefined"
+          method="post"
           novalidate
-          @submit.prevent="checkForm"
+          @submit.prevent="submitForm"
         >
           <label
             class="booking__field"
@@ -192,6 +203,7 @@
               v-model="serviceId"
               class="booking__control booking__select"
               name="serviceId"
+              @change="clearPricing"
             >
               <option value="">Допоможіть обрати</option>
               <option
@@ -297,18 +309,55 @@
               {{ error('comment') }}
             </span>
           </label>
+          <div
+            v-if="bookingUrl"
+            class="booking__trap"
+            aria-hidden="true"
+          >
+            <label for="booking-website">Не заповнюйте це поле</label>
+            <input
+              id="booking-website"
+              v-model="website"
+              name="website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
           <BaseButton
             class="booking__wide"
             type="submit"
+            :disabled="!hydrated"
+            :aria-disabled="sending || undefined"
           >
-            Перевірити дані
+            {{ submitLabel }}
           </BaseButton>
+          <noscript>
+            <p class="booking__wide booking__error">
+              Для надсилання форми увімкніть JavaScript або зв’яжіться із салоном.
+            </p>
+          </noscript>
           <p
             v-if="checked"
             class="booking__wide booking__prefill"
             role="status"
           >
             Дані заповнено коректно. Надсилання ще не підключене — заявку не відправлено.
+          </p>
+          <p
+            v-if="sendResult?.ok"
+            class="booking__wide booking__prefill"
+            role="status"
+          >
+            Заявку надіслано, номер {{ sendResult.reference }}. Ми зв’яжемося з вами через обраний
+            канал, щоб погодити дату й час.
+          </p>
+          <p
+            v-else-if="sendResult"
+            class="booking__wide booking__error"
+            role="alert"
+          >
+            {{ sendResult.message }}
           </p>
         </form>
       </div>
@@ -317,8 +366,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue';
-import type { PetType, PricingSelection } from '../../types/content';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import type { CoatLength, PetType, PricingSelection, WeightBand } from '../../types/content';
 import BaseContainer from '../ui/BaseContainer.vue';
 import BaseButton from '../ui/BaseButton.vue';
 import BaseIcon from '../ui/BaseIcon.vue';
@@ -331,6 +380,14 @@ import {
   type BookingChannel,
   type BookingField,
 } from '../../utils/validateBooking';
+import {
+  bookingUncertainMessage,
+  buildBookingPayload,
+  createRequestId,
+  readBookingResponse,
+  resolveBookingUrl,
+  type BookingResult,
+} from '../../utils/bookingRequest';
 import { useScrollReveal } from '../../composables/useScrollReveal';
 
 const props = defineProps<{ prefill: PricingSelection | null }>();
@@ -348,9 +405,34 @@ const contact = ref('');
 const comment = ref('');
 const prefilled = ref(false);
 const pricingDetails = ref('');
+const weightBand = ref<WeightBand | null>(null);
+const coatLength = ref<CoatLength | null>(null);
+const website = ref('');
 const touched = ref<Partial<Record<BookingField, boolean>>>({});
 const submitted = ref(false);
 const checked = ref(false);
+const sending = ref(false);
+const sendResult = ref<BookingResult | null>(null);
+// Until hydration a native submit would bypass validation, so the button stays disabled.
+const hydrated = ref(false);
+onMounted(() => {
+  hydrated.value = true;
+});
+const config = useRuntimeConfig();
+// Same value on the server and client: both come from the generated runtime config.
+const bookingUrl = computed(() =>
+  String(config.public.bookingEnabled) === 'true'
+    ? resolveBookingUrl(config.app.baseURL, String(config.public.bookingEndpoint ?? ''))
+    : null,
+);
+const submitLabel = computed(() => {
+  if (!bookingUrl.value) return 'Перевірити дані';
+  return sending.value ? 'Надсилаємо заявку' : 'Надіслати заявку';
+});
+// Kept while the content is unchanged so a retry cannot deliver the same enquiry twice.
+let requestId = '';
+let changedWhileSending = false;
+let controller: AbortController | null = null;
 const channels = [
   { id: 'telegram', label: 'Telegram' },
   { id: 'viber', label: 'Viber' },
@@ -409,24 +491,78 @@ const error = (field: BookingField) =>
 const touch = (field: BookingField) => {
   touched.value[field] = true;
 };
-watch([fields, petType, serviceId], () => {
+watch([fields, petType, serviceId, extras, weightBand, coatLength], () => {
   checked.value = false;
-});
-const checkForm = async () => {
-  submitted.value = true;
-  checked.value = false;
-  await nextTick();
-  if (Object.keys(errors.value).length) {
-    form.value?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+  if (sending.value) {
+    changedWhileSending = true;
     return;
   }
-  checked.value = true;
-};
+  requestId = '';
+  sendResult.value = null;
+});
 const clearPricing = () => {
   extras.value = [];
   prefilled.value = false;
   pricingDetails.value = '';
+  weightBand.value = null;
+  coatLength.value = null;
 };
+const sendBooking = async (url: string): Promise<BookingResult> => {
+  requestId ||= createRequestId(window.crypto);
+  const payload = buildBookingPayload({
+    ...fields.value,
+    requestId,
+    petType: petType.value,
+    serviceId: serviceId.value,
+    website: website.value,
+    weightBand: weightBand.value,
+    coatLength: coatLength.value,
+    extraIds: extras.value,
+  });
+  controller = new AbortController();
+  const timeout = window.setTimeout(() => controller?.abort(), 20000);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'same-origin',
+      signal: controller.signal,
+    });
+    const body: unknown = await response.json().catch(() => null);
+    return readBookingResponse(response.status, body);
+  } catch {
+    // The request may have reached the server; the same requestId guards a retry.
+    return { ok: false, message: bookingUncertainMessage };
+  } finally {
+    window.clearTimeout(timeout);
+    controller = null;
+  }
+};
+const submitForm = async () => {
+  if (sending.value) return;
+  submitted.value = true;
+  checked.value = false;
+  sendResult.value = null;
+  if (Object.keys(errors.value).length) {
+    await nextTick();
+    form.value?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    return;
+  }
+  if (!bookingUrl.value) {
+    checked.value = true;
+    return;
+  }
+  sending.value = true;
+  changedWhileSending = false;
+  const result = await sendBooking(bookingUrl.value);
+  // After success the fields stay visible; the same content and requestId return the same
+  // reference, while any edit starts a new enquiry.
+  if (changedWhileSending) requestId = '';
+  sending.value = false;
+  sendResult.value = result;
+};
+onBeforeUnmount(() => controller?.abort());
 const resetPet = () => {
   breedId.value = '';
   serviceId.value = '';
@@ -449,6 +585,8 @@ watch(
     breedId.value = value.breedId || '';
     serviceId.value = value.serviceId || '';
     extras.value = [...value.extraIds];
+    weightBand.value = value.weightBand ?? null;
+    coatLength.value = value.coatLength ?? null;
     const weightLabels = { 'under-5': 'до 5 кг', '5-10': '5–10 кг', '10-15': '10–15 кг' };
     const coatLabels = { short: 'коротка шерсть', medium: 'середня шерсть', long: 'довга шерсть' };
     pricingDetails.value = [
@@ -638,6 +776,14 @@ watch(
     margin: 0;
     color: #efb39d;
     font-size: 1rem;
+  }
+  // Honeypot for bots; hidden from people and assistive technology.
+  &__trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 }
 </style>

@@ -154,6 +154,7 @@ cold-cache, із затриманими fonts/images та поступовим H
 Користувач дозволив тимчасові нереальні зображення. AI hero — демонстраційний,
 original/prompt/checksums у source-assets; не трактувати його як реальні роботи.
 Navigation available flags true для створених секцій. CTA веде до #booking;
-форма поки не надсилає дані. Preview лишається noindex.
+форма надсилає POST до booking.php лише при NUXT_PUBLIC_BOOKING_ENABLED=true
+(HostPro); GitHub Pages і вимкнений прапорець — лише локальна перевірка. Preview лишається noindex.
 SCSS активний, fonts локальні й content-versioned через Vite, OFL у public/fonts.
 Для перевірок використовувати встановлений Node 24.22.0 (.nvmrc), не shell Node 20.
