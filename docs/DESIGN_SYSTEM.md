@@ -20,22 +20,22 @@ GSAP/ScrollTrigger вже підключені для hero; single photo + text/
 CSS custom properties живуть у `app/assets/styles/variables.scss`. Темна основа
 чергується з ivory editorial sections; це одна art direction, не theme switcher.
 
-| Token | Значення | Призначення |
-| --- | --- | --- |
-| `--color-black` | `#0B0C0E` | Глибокий фон |
-| `--color-charcoal` | `#1B1D21` | Піднята поверхня |
-| `--color-ivory` | `#F6F2E9` | Основний світлий текст/піднята світла поверхня |
-| `--color-cream` | `#F4E8DD` | Теплі світлі секції з reference |
-| `--color-gold-highlight` | `#F6D797` | Світлий край gold gradient/focus на темному |
-| `--color-silver` | `#BEC2C8` | Другорядний текст на темному |
-| `--color-gold` | `#C7A668` | Primary fill, декоративний акцент на темному |
-| `--color-gold-ink` | `#715323` | Акцентний текст на ivory |
-| `--color-line-dark` | `#737780` | Значущі межі на темному |
-| `--color-line-light` | `#8A8174` | Значущі межі на світлому |
-| `--color-error-dark` | `#FFB4AB` | Error на темному |
-| `--color-error-light` | `#9B2424` | Error на світлому |
-| `--color-success-dark` | `#A7D8B4` | Success на темному |
-| `--color-success-light` | `#245B35` | Success на світлому |
+| Token                    | Значення  | Призначення                                    |
+| ------------------------ | --------- | ---------------------------------------------- |
+| `--color-black`          | `#0B0C0E` | Глибокий фон                                   |
+| `--color-charcoal`       | `#1B1D21` | Піднята поверхня                               |
+| `--color-ivory`          | `#F6F2E9` | Основний світлий текст/піднята світла поверхня |
+| `--color-cream`          | `#F4E8DD` | Теплі світлі секції з reference                |
+| `--color-gold-highlight` | `#F6D797` | Світлий край gold gradient/focus на темному    |
+| `--color-silver`         | `#BEC2C8` | Другорядний текст на темному                   |
+| `--color-gold`           | `#C7A668` | Primary fill, декоративний акцент на темному   |
+| `--color-gold-ink`       | `#715323` | Акцентний текст на ivory                       |
+| `--color-line-dark`      | `#737780` | Значущі межі на темному                        |
+| `--color-line-light`     | `#8A8174` | Значущі межі на світлому                       |
+| `--color-error-dark`     | `#FFB4AB` | Error на темному                               |
+| `--color-error-light`    | `#9B2424` | Error на світлому                              |
+| `--color-success-dark`   | `#A7D8B4` | Success на темному                             |
+| `--color-success-light`  | `#245B35` | Success на світлому                            |
 
 Semantic aliases: `--surface`, `--surface-raised`, `--text-primary`,
 `--text-secondary`, `--border-control`, `--focus-ring`, `--feedback-error`,
@@ -60,11 +60,11 @@ gold gradient endpoints має 8.46:1 і 14.06:1; фактичний shimmer п�
 
 Перевірено метадані Google Fonts 2026-11-03:
 
-| Шрифт | Підтримка / роль | Стартові ваги |
-| --- | --- | --- |
-| Cormorant Garamond | Cyrillic + Cyrillic-ext; українські editorial h1/h2 і prominent CTA | 400, 500, 600 |
-| Bodoni Moda | Latin/Latin-ext; Cyrillic subset немає; лише вибрані English display fragments | 400–500 |
-| Manrope | Cyrillic + Cyrillic-ext; body, nav, labels, forms, numeric prices | 400, 500, 600 |
+| Шрифт              | Підтримка / роль                                                               | Стартові ваги |
+| ------------------ | ------------------------------------------------------------------------------ | ------------- |
+| Cormorant Garamond | Cyrillic + Cyrillic-ext; українські editorial h1/h2 і prominent CTA            | 400, 500, 600 |
+| Bodoni Moda        | Latin/Latin-ext; Cyrillic subset немає; лише вибрані English display fragments | 400–500       |
+| Manrope            | Cyrillic + Cyrillic-ext; body, nav, labels, forms, numeric prices              | 400, 500, 600 |
 
 Це перевірка сімейств, не вже завантажених WOFF2. Перед використанням перевірити
 cmap фактичних файлів та візуальний specimen: `Ґґ Єє Іі Її Йй Жж — ’ «» ₴ 0123456789`.
@@ -72,15 +72,15 @@ cmap фактичних файлів та візуальний specimen: `Ґґ �
 silent fallback для української у Bodoni. English fragments мають `lang="en"`.
 Слова не перекладати англійською лише заради шрифту. Не відтворювати логотип шрифтом.
 
-| Роль | Розмір (fluid) | Line-height | Примітка |
-| --- | --- | --- | --- |
-| Hero display | `clamp(3rem, 7vw, 7.5rem)` | 1.02–1.08 | Cormorant 400/500, без обрізаних діакритик |
-| Section h2 | `clamp(2.25rem, 4.5vw, 4.75rem)` | 1.1 | Cormorant 500 |
-| h3 | `clamp(1.625rem, 2.4vw, 2.5rem)` | 1.2 | Cormorant 500/600 |
-| Body | `clamp(1.125rem, 1.05rem + .2vw, 1.25rem)` | 1.6 | Manrope 400, measure 55–68ch |
-| Secondary / label | `1rem` | 1.5 | Manrope 400/500 |
-| Prominent CTA | `1.25rem` | 1.2 | Cormorant 600 |
-| Price | `clamp(1.5rem, 2.5vw, 2.25rem)` | 1.25 | Manrope, tabular-nums |
+| Роль              | Розмір (fluid)                             | Line-height | Примітка                                   |
+| ----------------- | ------------------------------------------ | ----------- | ------------------------------------------ |
+| Hero display      | `clamp(3rem, 7vw, 7.5rem)`                 | 1.02–1.08   | Cormorant 400/500, без обрізаних діакритик |
+| Section h2        | `clamp(2.25rem, 4.5vw, 4.75rem)`           | 1.1         | Cormorant 500                              |
+| h3                | `clamp(1.625rem, 2.4vw, 2.5rem)`           | 1.2         | Cormorant 500/600                          |
+| Body              | `clamp(1.125rem, 1.05rem + .2vw, 1.25rem)` | 1.6         | Manrope 400, measure 55–68ch               |
+| Secondary / label | `1rem`                                     | 1.5         | Manrope 400/500                            |
+| Prominent CTA     | `1.25rem`                                  | 1.2         | Cormorant 600                              |
+| Price             | `clamp(1.5rem, 2.5vw, 2.25rem)`            | 1.25        | Manrope, tabular-nums                      |
 
 Не зменшувати кнопки/labels до 12–14px заради luxury look. Letter spacing body 0;
 display орієнтовно -0.015em, не шкодити українським літерам. Заголовки можуть
@@ -119,13 +119,13 @@ Desktop ≥1200px: editorial asymmetry, до 12 grid tracks, scroll storytelling
 JS використовує відповідні min-width conditions; синхронність перевіряти тестом,
 SCSS — нормативне джерело, не вводити інші viewport thresholds.
 
-| Параметр | Mobile | Tablet | Desktop |
-| --- | --- | --- | --- |
-| Container | 100% мінус 2×20px | 100% мінус 2×32px | max 1440px, gutters fluid 40–80px |
-| Text container | max 68ch | max 68ch | max 68ch |
-| Section padding block | 80–112px | 112–152px | 144–200px |
-| Від h2 до content | 32–48px | 48–64px | 64–80px |
-| Grid gap | 24px | 32px | 40–64px |
+| Параметр              | Mobile            | Tablet            | Desktop                           |
+| --------------------- | ----------------- | ----------------- | --------------------------------- |
+| Container             | 100% мінус 2×20px | 100% мінус 2×32px | max 1440px, gutters fluid 40–80px |
+| Text container        | max 68ch          | max 68ch          | max 68ch                          |
+| Section padding block | 80–112px          | 112–152px         | 144–200px                         |
+| Від h2 до content     | 32–48px           | 48–64px           | 64–80px                           |
+| Grid gap              | 24px              | 32px              | 40–64px                           |
 
 Spacing scale у rem: .25, .5, .75, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12.
 Section spacing через clamp у межах таблиці. Не змушувати кожну секцію бути 100vh.

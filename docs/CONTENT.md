@@ -7,18 +7,18 @@
 
 ## Відповідальність і статус
 
-| Джерело | Поля | Статус |
-| --- | --- | --- |
-| Brief користувача | V.I.Pet Grooming Salon, Житомир, Україна, uk | Підтверджено для планування |
-| Desktop/mobile PNG | Layout, warm palette, gold CTA, photography direction | Отримані й переглянуті; originals збережені |
-| BusinessProfile | address, phone, hours, URLs, verified contacts | Очікується окреме підтвердження |
-| Services | IDs, titles, inclusions, pet types, media | Порожній typed catalog до отримання даних |
-| Pricing | Breed/service ranges, extras, constraints | Порожні typed tables; жодних screenshot prices |
-| FAQ | ID, question, answer | Порожній typed list до погоджених відповідей |
-| Groomer/statistics | Name, portrait, bio, evidence for each number | Не переносити screenshot persona/counts |
-| Certificates/gallery | Approved sources, dimensions, alt/captions, rights | Потрібні окремі publishable assets |
-| Testimonials | Exact text, name display permission, source | Не переносити screenshot quotations/ratings |
-| Booking | Approved endpoint, recipient, privacy/retention copy | Відправку не реалізовано |
+| Джерело              | Поля                                                  | Статус                                         |
+| -------------------- | ----------------------------------------------------- | ---------------------------------------------- |
+| Brief користувача    | V.I.Pet Grooming Salon, Житомир, Україна, uk          | Підтверджено для планування                    |
+| Desktop/mobile PNG   | Layout, warm palette, gold CTA, photography direction | Отримані й переглянуті; originals збережені    |
+| BusinessProfile      | address, phone, hours, URLs, verified contacts        | Очікується окреме підтвердження                |
+| Services             | IDs, titles, inclusions, pet types, media             | Порожній typed catalog до отримання даних      |
+| Pricing              | Breed/service ranges, extras, constraints             | Порожні typed tables; жодних screenshot prices |
+| FAQ                  | ID, question, answer                                  | Порожній typed list до погоджених відповідей   |
+| Groomer/statistics   | Name, portrait, bio, evidence for each number         | Не переносити screenshot persona/counts        |
+| Certificates/gallery | Approved sources, dimensions, alt/captions, rights    | Потрібні окремі publishable assets             |
+| Testimonials         | Exact text, name display permission, source           | Не переносити screenshot quotations/ratings    |
+| Booking              | Approved endpoint, recipient, privacy/retention copy  | Відправку не реалізовано                       |
 
 ## Правила моделей
 

@@ -1,0 +1,69 @@
+# V.I.Pet on HostPro (Nginx + Apache). Canonical origin: https://vipet-grooming.com.ua
+# Keep the host below in sync with NUXT_PUBLIC_SITE_URL in scripts/build-hostpro.mjs.
+
+Options -Indexes
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Let's Encrypt validation must stay reachable over plain HTTP.
+  RewriteRule ^\.well-known/acme-challenge/ - [L]
+
+  # One canonical origin: HTTPS without www. Nginx may terminate TLS before Apache,
+  # so X-Forwarded-Proto is checked to avoid a redirect loop.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://vipet-grooming.com.ua%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://vipet-grooming.com.ua%{REQUEST_URI} [L,R=301]
+
+  # Static build: only / exists. 200.html is an unused SPA fallback from Nuxt.
+  # THE_REQUEST matches only what the browser asked for, not the DirectoryIndex lookup,
+  # so / -> index.html internally does not loop.
+  RewriteCond %{THE_REQUEST} \s/(index|200)\.html[\s?]
+  RewriteRule ^ https://vipet-grooming.com.ua/ [L,R=301]
+</IfModule>
+
+# Hidden files (.DS_Store, editor leftovers) are never served.
+# .well-known stays open for Let's Encrypt / cPanel AutoSSL validation.
+<FilesMatch "^\.(?!well-known$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  # Only on HTTPS responses; no includeSubDomains/preload until the domain is settled.
+  Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on' || req('X-Forwarded-Proto') == 'https'"
+
+  # Nuxt assets have content hashes in their names.
+  <If "%{REQUEST_URI} =~ m#^/_nuxt/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <ElseIf "%{REQUEST_URI} =~ m#^/(images|videos|fonts)/#">
+    Header set Cache-Control "public, max-age=2592000"
+  </ElseIf>
+  <ElseIf "%{REQUEST_URI} =~ m#^/api/#">
+    Header set Cache-Control "no-store"
+  </ElseIf>
+  <ElseIf "%{REQUEST_URI} =~ m#(^/$|\.html$|/_payload\.json$|^/robots\.txt$|^/sitemap\.xml$)#">
+    Header set Cache-Control "no-cache"
+  </ElseIf>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType video/mp4 .mp4
+</IfModule>

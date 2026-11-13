@@ -9,8 +9,8 @@
 
 GitHub Pages — окрема production-оптимізована версія для погодження з noindex
 та локальною перевіркою форми. HostPro — майбутній основний сайт з PHP-обробником
-Telegram. Домен ще не підтверджено. Індексація вмикається явно через
-NUXT_PUBLIC_SITE_INDEXABLE=true разом з NUXT_PUBLIC_SITE_URL. Поточна SEO-реалізація
+Telegram. Домен — https://vipet-grooming.com.ua; збірка `npm run generate:hostpro`,
+індексація вмикається явно прапорцем `--indexable` (див. docs/HOSTPRO_DEPLOY.md). Поточна SEO-реалізація
 описана в docs/SEO_STRATEGY.md. Ініціалізацію повторно не запускати.
 Спілкування й документація українською, ідентифікатори коду англійською.
 
@@ -25,6 +25,7 @@ NUXT_PUBLIC_SITE_INDEXABLE=true разом з NUXT_PUBLIC_SITE_URL. Поточн
 - [Header/Hero: реалізація і перевірки](docs/HEADER_HERO_IMPLEMENTATION.md).
 - [SEO](docs/SEO_STRATEGY.md).
 - [План, команди, перевірки](docs/IMPLEMENTATION_PLAN.md).
+- [Деплой на HostPro](docs/HOSTPRO_DEPLOY.md).
 - [Реальний контент](docs/CONTENT_CHECKLIST.md).
 
 Явні рішення користувача мають пріоритет. Запропоновані кольори, бюджети й таймінги
@@ -142,7 +143,7 @@ cold-cache, із затриманими fonts/images та поступовим H
   єдині width-breakpoints — _breakpoints.scss. Не створювати паралельний _tokens.scss.
 - public/images — approved production images; originals не публікувати автоматично.
 - Поточний порядок DOM: Hero, Services, Groomer (із Certificates), BeforeAfter,
-  Pricing, Philosophy, PetGallery, Testimonials, Booking, BeforeVisit, SalonRules, FAQ, Contacts/Footer.
+  Pricing, Philosophy, PetGallery, BeforeVisit, Booking, Testimonials, SalonRules, FAQ, Contacts/Footer.
   Philosophy об’єднує підхід і цінності колишнього WhyChooseUs.
 - Gold pill CTA відповідає reference; без стрілок. Mobile device frames не UI.
 - UI/layout/sections імпортувати явно; не залежати від folder-prefix auto-import names.

@@ -1,4 +1,5 @@
 # V.I.Pet Grooming Salon
+
 ## Approved Desktop Design & Motion Specification
 
 **Статус:** затверджена концепція з урахуванням усіх останніх правок.
@@ -42,30 +43,24 @@
 
 Використовувати CSS custom properties.
 
-| Token | HEX | Призначення |
-|---|---|---|
-| `--color-graphite` | `#303033` | Основний графітовий фон |
-| `--color-graphite-deep` | `#232325` | Hero та темні секції |
-| `--color-graphite-dark` | `#1C1C1E` | Найглибші акценти |
-| `--color-graphite-card` | `#38383A` | Темні картки |
-| `--color-cream` | `#F7F1EA` | Світлі секції |
-| `--color-gold` | `#C6A667` | Основне золото |
-| `--color-gold-light` | `#E8C98A` | Світлі золоті акценти |
-| `--color-gold-dark` | `#A77B38` | Глибина золотих елементів |
-| `--color-silver` | `#C9C9CD` | Срібні елементи |
-| `--color-text-light` | `#F5F1EA` | Текст на темному фоні |
-| `--color-text-dark` | `#242326` | Текст на світлому фоні |
+| Token                   | HEX       | Призначення               |
+| ----------------------- | --------- | ------------------------- |
+| `--color-graphite`      | `#303033` | Основний графітовий фон   |
+| `--color-graphite-deep` | `#232325` | Hero та темні секції      |
+| `--color-graphite-dark` | `#1C1C1E` | Найглибші акценти         |
+| `--color-graphite-card` | `#38383A` | Темні картки              |
+| `--color-cream`         | `#F7F1EA` | Світлі секції             |
+| `--color-gold`          | `#C6A667` | Основне золото            |
+| `--color-gold-light`    | `#E8C98A` | Світлі золоті акценти     |
+| `--color-gold-dark`     | `#A77B38` | Глибина золотих елементів |
+| `--color-silver`        | `#C9C9CD` | Срібні елементи           |
+| `--color-text-light`    | `#F5F1EA` | Текст на темному фоні     |
+| `--color-text-dark`     | `#242326` | Текст на світлому фоні    |
 
 Для золотих кнопок дозволяється градієнт:
 
 ```css
-background: linear-gradient(
-  135deg,
-  #e8c98a 0%,
-  #c6a667 45%,
-  #f2d79e 70%,
-  #b88945 100%
-);
+background: linear-gradient(135deg, #e8c98a 0%, #c6a667 45%, #f2d79e 70%, #b88945 100%);
 ```
 
 Не застосовувати один і той самий відтінок графіту до всіх секцій.
@@ -84,16 +79,16 @@ background: linear-gradient(
 
 Рекомендована шкала для desktop:
 
-| Елемент | Розмір |
-|---|---|
-| Hero brand title | 100–136px |
-| Hero slogan | 42–56px |
-| Section heading | 54–72px |
-| Card title | 25–32px |
-| Body text | 16–18px |
-| Small labels | 12–14px |
-| Numeric statistics | 58–76px |
-| Button text | 18–21px |
+| Елемент            | Розмір    |
+| ------------------ | --------- |
+| Hero brand title   | 100–136px |
+| Hero slogan        | 42–56px   |
+| Section heading    | 54–72px   |
+| Card title         | 25–32px   |
+| Body text          | 16–18px   |
+| Small labels       | 12–14px   |
+| Numeric statistics | 58–76px   |
+| Button text        | 18–21px   |
 
 Розміри мають адаптуватися через `clamp()`.
 
@@ -128,16 +123,16 @@ background: linear-gradient(
 
 Стандартні параметри:
 
-| Тип | Duration | Easing |
-|---|---|---|
-| Heading reveal | 0.8–1.1s | `power3.out` |
-| Paragraph reveal | 0.6–0.8s | `power2.out` |
-| Card reveal | 0.65–0.9s | `power3.out` |
-| Image reveal | 0.9–1.2s | `power3.out` |
-| Hover | 0.25–0.35s | CSS ease |
-| Count Up | 1.5–2s | `power2.out` |
-| Carousel transition | 0.5–0.7s | smooth easing |
-| Gold shimmer | 0.6–0.8s | CSS ease |
+| Тип                 | Duration   | Easing        |
+| ------------------- | ---------- | ------------- |
+| Heading reveal      | 0.8–1.1s   | `power3.out`  |
+| Paragraph reveal    | 0.6–0.8s   | `power2.out`  |
+| Card reveal         | 0.65–0.9s  | `power3.out`  |
+| Image reveal        | 0.9–1.2s   | `power3.out`  |
+| Hover               | 0.25–0.35s | CSS ease      |
+| Count Up            | 1.5–2s     | `power2.out`  |
+| Carousel transition | 0.5–0.7s   | smooth easing |
+| Gold shimmer        | 0.6–0.8s   | CSS ease      |
 
 Стандартний ScrollTrigger:
 
@@ -179,10 +174,12 @@ Header розташовується поверх Hero.
 Desktop:
 
 **Ліворуч:**
+
 - Логотип V.I.Pet.
 - Маленький підпис Grooming Salon.
 
 **По центру:**
+
 - Головна.
 - Послуги.
 - Прайс.
@@ -193,6 +190,7 @@ Desktop:
 - Контакти.
 
 **Праворуч:**
+
 - Instagram.
 - Telegram.
 - Viber.

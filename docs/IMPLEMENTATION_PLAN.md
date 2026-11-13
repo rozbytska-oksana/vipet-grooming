@@ -143,18 +143,18 @@ npm run dev
 
 ## Залежності та обмеження
 
-| Пакет | Група | Навіщо |
-| --- | --- | --- |
-| nuxt, vue, vue-router зі starter | dependencies | Зберегти наявні версії, не знижувати router major |
-| @nuxt/image | dependencies | Responsive image URLs і static derivatives |
-| gsap | dependencies | ScrollTrigger входить у пакет, окремого scrolltrigger package немає |
-| embla-carousel-vue@8 | dependencies | Vue carousel, без autoplay plugins |
-| sass | devDependencies | SCSS compile |
-| typescript, vue-tsc, @types/node | devDependencies | Type checking/config types |
-| eslint, @nuxt/eslint, eslint-config-prettier | devDependencies | Nuxt flat config, correctness без formatter conflicts |
-| prettier | devDependencies | Єдиний formatter |
-| vitest | devDependencies | Pure domain/unit tests |
-| @nuxt/test-utils, @vue/test-utils, happy-dom | devDependencies | Цільові Nuxt/Vue component tests у сумісному test environment |
+| Пакет                                        | Група           | Навіщо                                                              |
+| -------------------------------------------- | --------------- | ------------------------------------------------------------------- |
+| nuxt, vue, vue-router зі starter             | dependencies    | Зберегти наявні версії, не знижувати router major                   |
+| @nuxt/image                                  | dependencies    | Responsive image URLs і static derivatives                          |
+| gsap                                         | dependencies    | ScrollTrigger входить у пакет, окремого scrolltrigger package немає |
+| embla-carousel-vue@8                         | dependencies    | Vue carousel, без autoplay plugins                                  |
+| sass                                         | devDependencies | SCSS compile                                                        |
+| typescript, vue-tsc, @types/node             | devDependencies | Type checking/config types                                          |
+| eslint, @nuxt/eslint, eslint-config-prettier | devDependencies | Nuxt flat config, correctness без formatter conflicts               |
+| prettier                                     | devDependencies | Єдиний formatter                                                    |
+| vitest                                       | devDependencies | Pure domain/unit tests                                              |
+| @nuxt/test-utils, @vue/test-utils, happy-dom | devDependencies | Цільові Nuxt/Vue component tests у сумісному test environment       |
 
 Не потрібні зараз: Pinia, Tailwind/UI kit, Zod, form framework, axios, jQuery,
 smooth-scroll library, CMS, carousel autoplay, paid animation plugins, повний SEO
@@ -321,17 +321,17 @@ CI після ручного налаштування: npm ci → prepare/check 
 
 ## Наступні фази
 
-| Фаза | Залежності | Роботи | Acceptance / перевірки |
-| --- | --- | --- | --- |
-| 0 — документація | Поточний brief | 8 Markdown-файлів, рішення/ризики/команди | Усі файли та local links, однакова структура/токени, без application files |
-| 1 — foundation | Ручна ініціалізація | Tooling, tokens, typography, image spike, static hero proof | Критерії вище, без release |
-| 2 — semantic content | Logo/photos/approved copy | Усі 13 секцій, data models, native FAQ/nav, static gallery | SSR/no-JS, headings/alt, keyboard, mobile, немає placeholders у release |
-| 3 — pricing/form UI | Погоджений pricing dataset | Pure calculator, extras/ranges, prefill, validation; real submit disabled | Unit cases, pet change reset, focus/live regions, збереження введених PII |
-| 4 — media interactions | Реальні before-after/certificates | Range slider, Embla, full-size dialog | Touch/keyboard/Escape/focus return, no-JS links, static image completeness |
-| 5 — motion | Стабільний responsive layout | Hero/Groomer/ScrollTrigger scenes, count-up з verified stats | Reduced motion, once, cleanup/remount, mobile perf, без scroll hijacking |
-| 6 — booking delivery | Hosting/provider/одержувач/privacy | Endpoint/adapter, server validation, rate limits/idempotency | Реальна авторизована доставка, 422/429/5xx/timeout/retry, немає fake success |
-| 7 — SEO/release preparation | Verified origin/NAP, весь контент | Metadata/schema/sitemap/robots/404, performance audit, packaged static output | Артефакти, root/base paths, Lighthouse/trace, контент і права погоджені |
-| 8 — publication | Окремий дозвіл власниці | Deploy і live verification | TLS/redirects/headers/pages/assets/404/indexing, rollback copy поза public |
+| Фаза                        | Залежності                         | Роботи                                                                        | Acceptance / перевірки                                                       |
+| --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| 0 — документація            | Поточний brief                     | 8 Markdown-файлів, рішення/ризики/команди                                     | Усі файли та local links, однакова структура/токени, без application files   |
+| 1 — foundation              | Ручна ініціалізація                | Tooling, tokens, typography, image spike, static hero proof                   | Критерії вище, без release                                                   |
+| 2 — semantic content        | Logo/photos/approved copy          | Усі 13 секцій, data models, native FAQ/nav, static gallery                    | SSR/no-JS, headings/alt, keyboard, mobile, немає placeholders у release      |
+| 3 — pricing/form UI         | Погоджений pricing dataset         | Pure calculator, extras/ranges, prefill, validation; real submit disabled     | Unit cases, pet change reset, focus/live regions, збереження введених PII    |
+| 4 — media interactions      | Реальні before-after/certificates  | Range slider, Embla, full-size dialog                                         | Touch/keyboard/Escape/focus return, no-JS links, static image completeness   |
+| 5 — motion                  | Стабільний responsive layout       | Hero/Groomer/ScrollTrigger scenes, count-up з verified stats                  | Reduced motion, once, cleanup/remount, mobile perf, без scroll hijacking     |
+| 6 — booking delivery        | Hosting/provider/одержувач/privacy | Endpoint/adapter, server validation, rate limits/idempotency                  | Реальна авторизована доставка, 422/429/5xx/timeout/retry, немає fake success |
+| 7 — SEO/release preparation | Verified origin/NAP, весь контент  | Metadata/schema/sitemap/robots/404, performance audit, packaged static output | Артефакти, root/base paths, Lighthouse/trace, контент і права погоджені      |
+| 8 — publication             | Окремий дозвіл власниці            | Deploy і live verification                                                    | TLS/redirects/headers/pages/assets/404/indexing, rollback copy поза public   |
 
 Delivery decision можна досліджувати паралельно із static content, але live booking
 не може випередити endpoint/privacy approval. Motion не повинен маскувати нестабільний
@@ -382,20 +382,20 @@ CLS ≤0.1, INP ≤200ms. Lighthouse TBT лише proxy, INP перевірят�
 
 ## Ризики й невирішені рішення
 
-| Питання / ризик | Коли блокує | Власник / наступна дія |
-| --- | --- | --- |
-| Hosting, origin, base path, true 404/cache headers | Image/release proof, live booking | Власниця надає hosting/domain; розробник перевіряє можливості |
-| Node 20 EOL / mutable latest tooling | Ініціалізацію на підтримуваному runtime | Користувач обирає Node 24, звіряє engines/peers |
-| Empty folder успадковує parent Git | Version-control setup | Користувач вирішує окремий repo; не чіпати parent |
-| Немає logo/hero/portrait/gallery assets | Візуальне затвердження | Власниця надає originals/права, погоджує crops |
-| Три font families і тонкі serifs | Читабельність/CLS/performance | Розробник перевіряє actual glyphs, subset і fallback; Bodoni лише латиниця |
-| Static image discovery пропускає modal/source URLs | Deployable media | Manifest-driven prerender + artifact URL checks; fallback pre-generation |
-| Unknown prices/extra compatibility | Calculator data integration | Власниця підтверджує матрицю, не вставляти mock prices |
-| Немає verified statistics/testimonials | Відповідні content sections | Не показувати вигаданих фактів; затвердити контент або відкласти секцію |
-| Booking delivery/provider/recipient/privacy | Real submission | Власниця обирає з варіантів ARCHITECTURE; developer перевіряє контракт |
-| Schema subtype не відповідає грумінгу | Structured data | Базовий LocalBusiness + Service, не вигадувати subtype |
-| Heavy motion / pin / delayed LCP | Motion acceptance | Progressive enhancement, mobile simplify, trace/profile |
-| Preview accidentally indexable або fake success | Будь-який public preview | Explicit noindex і disabled real submit, artifact gate |
+| Питання / ризик                                    | Коли блокує                             | Власник / наступна дія                                                     |
+| -------------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------- |
+| Hosting, origin, base path, true 404/cache headers | Image/release proof, live booking       | Власниця надає hosting/domain; розробник перевіряє можливості              |
+| Node 20 EOL / mutable latest tooling               | Ініціалізацію на підтримуваному runtime | Користувач обирає Node 24, звіряє engines/peers                            |
+| Empty folder успадковує parent Git                 | Version-control setup                   | Користувач вирішує окремий repo; не чіпати parent                          |
+| Немає logo/hero/portrait/gallery assets            | Візуальне затвердження                  | Власниця надає originals/права, погоджує crops                             |
+| Три font families і тонкі serifs                   | Читабельність/CLS/performance           | Розробник перевіряє actual glyphs, subset і fallback; Bodoni лише латиниця |
+| Static image discovery пропускає modal/source URLs | Deployable media                        | Manifest-driven prerender + artifact URL checks; fallback pre-generation   |
+| Unknown prices/extra compatibility                 | Calculator data integration             | Власниця підтверджує матрицю, не вставляти mock prices                     |
+| Немає verified statistics/testimonials             | Відповідні content sections             | Не показувати вигаданих фактів; затвердити контент або відкласти секцію    |
+| Booking delivery/provider/recipient/privacy        | Real submission                         | Власниця обирає з варіантів ARCHITECTURE; developer перевіряє контракт     |
+| Schema subtype не відповідає грумінгу              | Structured data                         | Базовий LocalBusiness + Service, не вигадувати subtype                     |
+| Heavy motion / pin / delayed LCP                   | Motion acceptance                       | Progressive enhancement, mobile simplify, trace/profile                    |
+| Preview accidentally indexable або fake success    | Будь-який public preview                | Explicit noindex і disabled real submit, artifact gate                     |
 
 Жоден із цих пунктів не блокує завершення Phase 0. Не потрібно зараз переривати
 документацію питаннями про ціни/контакти; збирати їх до відповідного milestone.
@@ -407,7 +407,6 @@ menu/Escape/focus/CTA та actual responsive rendering. Наявна .nvmrc об
 встановлений Node 24.22.0. Повторна ініціалізація не потрібна. Типи/formatter/lint
 підключаються після ручної інсталяції відповідного tooling, а не автоматичного npx.
 Після погодження першого екрана — наступні секції та реальні assets за CONTENT_CHECKLIST.
-
 
 Офіційні джерела, звірені для плану:
 [Nuxt creator](https://nuxt.com/docs/4.x/api/commands/init),

@@ -6,10 +6,10 @@
 
 ## Джерела та межі використання
 
-| Референс | Фактичний файл | Розмір | Обсяг |
-| --- | --- | --- | --- |
-| Desktop | [V.I.Pet: Розкішний грумінг у Житомирі](<references/V.I.Pet_ Розкішний грумінг у Житомирі.png>) | 1024×1536px | 2 151 555 bytes |
-| Mobile | [Розкішний мобільний сайт](<references/Розкішний мобільний сайт V.I.Pet Grooming Salon.png>) | 724×2172px | 2 150 414 bytes |
+| Референс | Фактичний файл                                                                                  | Розмір      | Обсяг           |
+| -------- | ----------------------------------------------------------------------------------------------- | ----------- | --------------- |
+| Desktop  | [V.I.Pet: Розкішний грумінг у Житомирі](<references/V.I.Pet_ Розкішний грумінг у Житомирі.png>) | 1024×1536px | 2 151 555 bytes |
+| Mobile   | [Розкішний мобільний сайт](<references/Розкішний мобільний сайт V.I.Pet Grooming Salon.png>)    | 724×2172px  | 2 150 414 bytes |
 
 Desktop — стислий довгий знімок усієї концепції. Mobile — три рамки телефонів із
 фрагментами довгої сторінки, а не layout у три колонки, не три routes і не screenshot
@@ -52,23 +52,23 @@ HEX у дизайн-системі — контрольована web-паліт
 
 ## Аналіз секцій і технічні наслідки
 
-| Область | Що видно в reference | Як реалізувати |
-| --- | --- | --- |
-| Header | Logo зліва, щільна desktop nav, social icons і CTA; mobile logo + burger | SiteHeader, компактна nav; menu panel з keyboard/Escape/focus return; social links тільки з verified URLs; sticky не вважати підтвердженим зі screenshot |
-| Hero | Desktop текст ліворуч, dog/cat праворуч; gold arc; mobile текст над тваринами, trust row і CTA нижче | HeroSection із responsive art direction; справжній h1/copy/CTA в DOM; окремі photo/decor layers лише за наявності originals; native scroll, зарезервована висота |
-| Trust / Philosophy | Три короткі trust labels у hero, окремої philosophy story немає | Залишити PhilosophySection з brief; не дублювати hero labels у великій кількості; текст очікує погодження |
-| Services | Desktop 3 cards у верхньому ряду + 2 широкі нижче; mobile 3 stacked cards і «Всі послуги» | Grid на 6 tracks на desktop: 2/2/2 + 3/3 spans; tablet 2 колонки; mobile повний список або accessible disclosure, не втрата 2 послуг |
-| Service card | Photo зліва, icon/title/description праворуч, gold price pill | Reusable ServiceCard лише при реальній реалізації; title/copy у HTML; price — текст, а не button, якщо він нічого не робить; ranges тільки з verified data |
-| Groomer | Desktop portrait + bio/stats поруч; mobile portrait над біографією, signature й stats нижче | GroomerSection, content-first DOM; portrait не crop з mockup; stats optional; signature decorative/approved |
-| Certificates | Desktop поруч із groomer, mobile окрема dark section; overlapping certificate cards, dots, prev/next | Незалежний CertificatesSection з anchor; desktop сусід у спільній grid-групі, не вкладений у GroomerSection; Embla + dialog/full-size link |
-| Before/after | Desktop heading ліворуч, широкий comparison праворуч; mobile вертикальна пара у mask, handle, labels і dots | BeforeAfterSection, один native range з клавіатурою; фото однакової геометрії; при кількох парах окрема navigation без конфлікту swipe/drag |
-| Gallery | Окремої Pet Fashion Show немає | PetGallerySection лишається з brief: реальні роботи, desktop storytelling optional, mobile swipe; не підміняти before-after тією самою галереєю |
-| Pricing | Desktop вузький horizontal strip; mobile stacked choices, pet toggles, selects, summary і CTA | PricingSection не стискати до strip; petType/breed/service + extras; page-owned selection → BookingSection; no known price → quote-required |
-| Why choose us | Desktop 5 причин у ряд; mobile icon/text list | WhyChooseUsSection із configurable items; factual copy очікує погодження; без надлишкових boxed cards |
-| Testimonials | Desktop 3 dark cards і navigation; mobile одна card з dots | Реальні відгуки/permission; component може бути статичним grid на desktop, Embla на mobile; рішення не вимагає autoplay |
-| FAQ | Desktop світлий блок поруч із booking/contact CTA; mobile окрема секція | FaqSection з native details/summary і повними SSR answers на всіх екранах; accordion indicators — SVG/CSS |
-| Booking | Desktop лише CTA і messenger links; mobile повна форма | На desktop теж повна BookingSection із усіма required полями; contact links не замінюють submit; endpoint окреме рішення |
-| Footer | Dark logo/tagline/address/phone/social icons; mobile вертикальна композиція й back-to-top | SiteFooter володіє contacts anchor; відображає лише verified contacts; back-to-top — accessible anchor зі SVG, copyright не копіювати зі знімка |
+| Область            | Що видно в reference                                                                                        | Як реалізувати                                                                                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Header             | Logo зліва, щільна desktop nav, social icons і CTA; mobile logo + burger                                    | SiteHeader, компактна nav; menu panel з keyboard/Escape/focus return; social links тільки з verified URLs; sticky не вважати підтвердженим зі screenshot         |
+| Hero               | Desktop текст ліворуч, dog/cat праворуч; gold arc; mobile текст над тваринами, trust row і CTA нижче        | HeroSection із responsive art direction; справжній h1/copy/CTA в DOM; окремі photo/decor layers лише за наявності originals; native scroll, зарезервована висота |
+| Trust / Philosophy | Три короткі trust labels у hero, окремої philosophy story немає                                             | Залишити PhilosophySection з brief; не дублювати hero labels у великій кількості; текст очікує погодження                                                        |
+| Services           | Desktop 3 cards у верхньому ряду + 2 широкі нижче; mobile 3 stacked cards і «Всі послуги»                   | Grid на 6 tracks на desktop: 2/2/2 + 3/3 spans; tablet 2 колонки; mobile повний список або accessible disclosure, не втрата 2 послуг                             |
+| Service card       | Photo зліва, icon/title/description праворуч, gold price pill                                               | Reusable ServiceCard лише при реальній реалізації; title/copy у HTML; price — текст, а не button, якщо він нічого не робить; ranges тільки з verified data       |
+| Groomer            | Desktop portrait + bio/stats поруч; mobile portrait над біографією, signature й stats нижче                 | GroomerSection, content-first DOM; portrait не crop з mockup; stats optional; signature decorative/approved                                                      |
+| Certificates       | Desktop поруч із groomer, mobile окрема dark section; overlapping certificate cards, dots, prev/next        | Незалежний CertificatesSection з anchor; desktop сусід у спільній grid-групі, не вкладений у GroomerSection; Embla + dialog/full-size link                       |
+| Before/after       | Desktop heading ліворуч, широкий comparison праворуч; mobile вертикальна пара у mask, handle, labels і dots | BeforeAfterSection, один native range з клавіатурою; фото однакової геометрії; при кількох парах окрема navigation без конфлікту swipe/drag                      |
+| Gallery            | Окремої Pet Fashion Show немає                                                                              | PetGallerySection лишається з brief: реальні роботи, desktop storytelling optional, mobile swipe; не підміняти before-after тією самою галереєю                  |
+| Pricing            | Desktop вузький horizontal strip; mobile stacked choices, pet toggles, selects, summary і CTA               | PricingSection не стискати до strip; petType/breed/service + extras; page-owned selection → BookingSection; no known price → quote-required                      |
+| Why choose us      | Desktop 5 причин у ряд; mobile icon/text list                                                               | WhyChooseUsSection із configurable items; factual copy очікує погодження; без надлишкових boxed cards                                                            |
+| Testimonials       | Desktop 3 dark cards і navigation; mobile одна card з dots                                                  | Реальні відгуки/permission; component може бути статичним grid на desktop, Embla на mobile; рішення не вимагає autoplay                                          |
+| FAQ                | Desktop світлий блок поруч із booking/contact CTA; mobile окрема секція                                     | FaqSection з native details/summary і повними SSR answers на всіх екранах; accordion indicators — SVG/CSS                                                        |
+| Booking            | Desktop лише CTA і messenger links; mobile повна форма                                                      | На desktop теж повна BookingSection із усіма required полями; contact links не замінюють submit; endpoint окреме рішення                                         |
+| Footer             | Dark logo/tagline/address/phone/social icons; mobile вертикальна композиція й back-to-top                   | SiteFooter володіє contacts anchor; відображає лише verified contacts; back-to-top — accessible anchor зі SVG, copyright не копіювати зі знімка                  |
 
 ## Responsive правила та єдиний порядок контенту
 

@@ -36,8 +36,8 @@ vipet-booking-config.php у батьківську папку кореня са�
 `/home/account/public_html` це буде `/home/account/vipet-booking-config.php`.
 Фактичний корінь сайту перевірте в панелі HostPro.
 
-Заповніть у файлі `bot_token`, `chat_id`, `allowed_origin` та встановіть
-`enabled` у `true`. Origin — точна адреса сайту з протоколом HTTPS без
+Заповніть у файлі `bot_token`, `chat_id` та встановіть `enabled` у `true`.
+`allowed_origin` у шаблоні вже дорівнює `https://vipet-grooming.com.ua`. Origin — точна адреса сайту з протоколом HTTPS без
 шляху та фінального слеша. Отримувач має бути тим самим чатом, який натиснув Start.
 Надайте файлу доступ лише для облікового запису, від якого працює PHP.
 
@@ -54,13 +54,16 @@ REMOTE_ADDR. Якщо сайт працює через проксі, налаш�
 
 ## Збірка та завантаження
 
-У приватному `.env` змініть `NUXT_PUBLIC_BOOKING_ENABLED` на `true` після
-налаштування обробника. Значення `NUXT_PUBLIC_BOOKING_ENDPOINT=api/booking.php`
-є відносним до app.baseURL.
+Production-збірка для https://vipet-grooming.com.ua сама вмикає форму, задає
+домен і endpoint `api/booking.php` (відносно app.baseURL). Значення з `.env`
+для цих параметрів не використовуються.
 
 ```sh
-npm run generate
+npm run generate:hostpro
 ```
+
+Для публічного запуску з індексацією: `npm run generate:hostpro -- --indexable`.
+Покроковий чекліст деплою — [HOSTPRO_DEPLOY.md](HOSTPRO_DEPLOY.md).
 
 `pregenerate` синхронізує booking-catalog.json із breeds, services та pricingRules.
 Так само каталог оновлюється перед dev та build. На сервер перенесіть вміст

@@ -12,7 +12,8 @@
     "prebuild": "node scripts/export-booking-catalog.mjs",
     "pregenerate": "node scripts/export-booking-catalog.mjs",
     "predev": "node scripts/export-booking-catalog.mjs",
-    "generate:pages": "node scripts/build-github-pages.mjs"
+    "generate:pages": "node scripts/build-github-pages.mjs",
+    "generate:hostpro": "node scripts/build-hostpro.mjs"
   },
   "dependencies": {
     "embla-carousel-vue": "^8.6.0",

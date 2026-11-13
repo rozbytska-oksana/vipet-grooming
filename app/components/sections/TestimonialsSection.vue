@@ -348,7 +348,8 @@ onBeforeUnmount(() => {
   }
   &__read-more {
     display: block;
-    min-height: 44px;
+    // Inactive cards use scale(0.96); 46px keeps the visible target at least 44px.
+    min-height: 46px;
     padding: 0.5rem 0;
     border: 0;
     background: transparent;

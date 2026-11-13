@@ -30,6 +30,9 @@ vipet-booking-state.json
 # Isolated GitHub Pages build
 .nuxt-pages/
 .output-pages/
+
+# Isolated HostPro build directory
+.nuxt-hostpro/
 artifacts/
 
 # Local original media and design references

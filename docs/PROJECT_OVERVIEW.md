@@ -34,21 +34,21 @@ V.I.Pet Grooming Salon — преміальний грумінг-салон у �
 
 ## Карта односторінкового сайту
 
-| № | Секція / anchor | Призначення та потрібний контент |
-| --- | --- | --- |
-| 1 | Cinematic Hero / `#hero` | Один український h1, editorial statement, реальні dog/cat фото, CTA до `#booking` |
-| 2 | Philosophy / Trust / Care / `#philosophy` | Підтверджений підхід до догляду; без абсолютних гарантій |
-| 3 | Our Services / `#services` | Реальний каталог, вид тварини, що входить, фото |
-| 4 | Meet the Groomer / `#groomer` | Ім’я, портрет, біографія, лише підтверджені статистики |
-| 5 | Certificates / `#certificates` | Освіта й сертифікати з читабельним переглядом |
-| 6 | Before & After / `#before-after` | Узгоджені пари фото однієї тварини та доступне порівняння |
-| 7 | Pet Fashion Show / `#gallery` | Реальні роботи, desktop storytelling, mobile swipe |
-| 8 | Interactive Pricing / `#pricing` | Вид, порода, послуга, extras, діапазон і пояснення |
-| 9 | Why V.I.Pet / `#why-vipet` | Доказові відмінності без порівнянь із неназваними конкурентами |
-| 10 | Testimonials / `#testimonials` | Дозволені справжні відгуки з джерелом |
-| 11 | FAQ / `#faq` | Підтверджені відповіді, доступні на desktop/mobile |
-| 12 | Booking Form / `#booking` | Запит на запис із чесним станом доставки |
-| 13 | Contacts & Footer / `#contacts` | Підтверджені NAP, години, соцмережі, privacy information |
+| №   | Секція / anchor                           | Призначення та потрібний контент                                                  |
+| --- | ----------------------------------------- | --------------------------------------------------------------------------------- |
+| 1   | Cinematic Hero / `#hero`                  | Один український h1, editorial statement, реальні dog/cat фото, CTA до `#booking` |
+| 2   | Philosophy / Trust / Care / `#philosophy` | Підтверджений підхід до догляду; без абсолютних гарантій                          |
+| 3   | Our Services / `#services`                | Реальний каталог, вид тварини, що входить, фото                                   |
+| 4   | Meet the Groomer / `#groomer`             | Ім’я, портрет, біографія, лише підтверджені статистики                            |
+| 5   | Certificates / `#certificates`            | Освіта й сертифікати з читабельним переглядом                                     |
+| 6   | Before & After / `#before-after`          | Узгоджені пари фото однієї тварини та доступне порівняння                         |
+| 7   | Pet Fashion Show / `#gallery`             | Реальні роботи, desktop storytelling, mobile swipe                                |
+| 8   | Interactive Pricing / `#pricing`          | Вид, порода, послуга, extras, діапазон і пояснення                                |
+| 9   | Why V.I.Pet / `#why-vipet`                | Доказові відмінності без порівнянь із неназваними конкурентами                    |
+| 10  | Testimonials / `#testimonials`            | Дозволені справжні відгуки з джерелом                                             |
+| 11  | FAQ / `#faq`                              | Підтверджені відповіді, доступні на desktop/mobile                                |
+| 12  | Booking Form / `#booking`                 | Запит на запис із чесним станом доставки                                          |
+| 13  | Contacts & Footer / `#contacts`           | Підтверджені NAP, години, соцмережі, privacy information                          |
 
 `header` містить компактну навігацію до основних секцій, mobile menu і skip link.
 Не потрібно вміщувати всі 13 anchors в один рядок. Секції з відсутнім контентом

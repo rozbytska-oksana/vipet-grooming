@@ -3,8 +3,10 @@
 ## Реалізація станом на 2026-11-10
 
 Основна мова uk, Open Graph locale uk_UA. Адресу, телефон, Instagram і графік
-підтвердила користувачка, вони зберігаються в app/data/salon.ts. Основний домен
-додамо пізніше. До цього збірка залишається noindex,nofollow.
+підтвердила користувачка, вони зберігаються в app/data/salon.ts. Основний домен —
+https://vipet-grooming.com.ua (підтверджено 2026-11-13). `npm run generate:hostpro`
+задає його як NUXT_PUBLIC_SITE_URL і лишає noindex,nofollow, доки збірку не
+запущено з `--indexable`. public/.htaccess робить цей origin канонічним (HTTPS, без www).
 
 app/composables/useHomeSeo.ts налаштовує title, description, Open Graph та Twitter
 Card. Соцпрев’ю — images/social-preview.jpg, 1200×630, з оригінальним логотипом.

@@ -37,6 +37,8 @@ if (result.status !== 0) {
 
 const publicDirectory = path.join(output, 'public');
 await rm(path.join(publicDirectory, 'api'), { recursive: true, force: true });
+// Apache rules and the canonical host belong to the HostPro build only.
+await rm(path.join(publicDirectory, '.htaccess'), { force: true });
 await mkdir(publicDirectory, { recursive: true });
 await writeFile(path.join(publicDirectory, '.nojekyll'), '');
 console.log(`GitHub Pages review build ready in ${publicDirectory} with base ${baseURL}`);

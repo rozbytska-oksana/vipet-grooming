@@ -17,19 +17,19 @@ starter dependencies і Sass; global SCSS та NuxtPage підключені. Д
 
 ## Рішення
 
-| Питання | Рекомендація | Причина / межа |
-| --- | --- | --- |
-| Rendering | Nuxt 4, SSR enabled, `nuxt generate` | Контент доступний до JS; static hosting |
-| Routing | `app/pages/index.vue`, `app/app.vue` з NuxtPage | Один content route, можливі допоміжні legal pages |
-| Styling | Scoped SCSS + shared tokens/fonts/reset | Без UI framework; mobile-first |
-| Content | Typed local data | CMS не потрібна для першого випуску |
-| State | Page-level refs/computed + props/events | Pricing/booking спільні лише в одній сторінці |
-| Motion | CSS/native + client GSAP/ScrollTrigger | Не включати animation runtime в SSR logic |
-| Carousel | `embla-carousel-vue` v8 | Версійно узгоджена Vue 3 інтеграція |
-| Images | Nuxt Image build-time static pipeline | Production image server не передбачається |
-| Requests | Окремий delivery adapter / HTTPS endpoint | Static page не може безпечно тримати bot/SMTP secrets |
-| Testing | Vitest, цільові component tests | Pure pricing + критичні interactive contracts |
-| SEO | Nuxt head APIs, small build-time artifacts | Без повного SEO suite для одного route |
+| Питання   | Рекомендація                                    | Причина / межа                                        |
+| --------- | ----------------------------------------------- | ----------------------------------------------------- |
+| Rendering | Nuxt 4, SSR enabled, `nuxt generate`            | Контент доступний до JS; static hosting               |
+| Routing   | `app/pages/index.vue`, `app/app.vue` з NuxtPage | Один content route, можливі допоміжні legal pages     |
+| Styling   | Scoped SCSS + shared tokens/fonts/reset         | Без UI framework; mobile-first                        |
+| Content   | Typed local data                                | CMS не потрібна для першого випуску                   |
+| State     | Page-level refs/computed + props/events         | Pricing/booking спільні лише в одній сторінці         |
+| Motion    | CSS/native + client GSAP/ScrollTrigger          | Не включати animation runtime в SSR logic             |
+| Carousel  | `embla-carousel-vue` v8                         | Версійно узгоджена Vue 3 інтеграція                   |
+| Images    | Nuxt Image build-time static pipeline           | Production image server не передбачається             |
+| Requests  | Окремий delivery adapter / HTTPS endpoint       | Static page не може безпечно тримати bot/SMTP secrets |
+| Testing   | Vitest, цільові component tests                 | Pure pricing + критичні interactive contracts         |
+| SEO       | Nuxt head APIs, small build-time artifacts      | Без повного SEO suite для одного route                |
 
 ## Узгоджений напрям структури
 
@@ -117,18 +117,18 @@ vipet-grooming/
 
 ## Межі компонентів і composition
 
-| Рівень | Відповідальність | Чого не робить |
-| --- | --- | --- |
-| pages/index.vue | Єдиний DOM порядок, SEO, page-local PricingSelection, prefill через props/events | Не містить price matrix, GSAP globals чи server secrets |
-| ui/BaseButton | Native button/link, variants, pending/focus, slot label | Не виконує submit delivery або routing через div click |
-| ui/BaseHeading | Semantic heading level незалежно від visual size | Не створює h1 у кожній секції |
-| ui/BaseContainer | Width/gutters і slot | Не додає section semantics чи великий vertical spacing |
-| ui/BaseImage | Тонкий Nuxt Image/picture adapter, явні alt/dimensions/sources | Не приховує art direction і не вигадує runtime image server |
-| layout/SiteHeader | Logo, доступна навігація, mobile menu, CTA | Не керує calculator/form state |
-| layout/SiteFooter | 13-та змістова зона contacts, verified links, legal copy | Не бере адресу/телефон із mockup |
-| sections/* | Власний anchor/heading/layout, props із typed data, scoped styles | Не дублює бізнес-дані в template |
-| composables/* | Client lifecycle і незалежна interaction logic | Не читає browser APIs під час SSR і не створює shared store |
-| data/* + types/* | Реальний контент і доменні контракти | Не містить screenshot fixtures як production data |
+| Рівень            | Відповідальність                                                                 | Чого не робить                                              |
+| ----------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| pages/index.vue   | Єдиний DOM порядок, SEO, page-local PricingSelection, prefill через props/events | Не містить price matrix, GSAP globals чи server secrets     |
+| ui/BaseButton     | Native button/link, variants, pending/focus, slot label                          | Не виконує submit delivery або routing через div click      |
+| ui/BaseHeading    | Semantic heading level незалежно від visual size                                 | Не створює h1 у кожній секції                               |
+| ui/BaseContainer  | Width/gutters і slot                                                             | Не додає section semantics чи великий vertical spacing      |
+| ui/BaseImage      | Тонкий Nuxt Image/picture adapter, явні alt/dimensions/sources                   | Не приховує art direction і не вигадує runtime image server |
+| layout/SiteHeader | Logo, доступна навігація, mobile menu, CTA                                       | Не керує calculator/form state                              |
+| layout/SiteFooter | 13-та змістова зона contacts, verified links, legal copy                         | Не бере адресу/телефон із mockup                            |
+| sections/*        | Власний anchor/heading/layout, props із typed data, scoped styles                | Не дублює бізнес-дані в template                            |
+| composables/*     | Client lifecycle і незалежна interaction logic                                   | Не читає browser APIs під час SSR і не створює shared store |
+| data/* + types/*  | Реальний контент і доменні контракти                                             | Не містить screenshot fixtures як production data           |
 
 Імпорти UI/layout/section components у script setup — явні. Це зберігає запропоновані
 імена без залежності від folder-prefixed auto-import naming; глобальне pathPrefix
@@ -164,19 +164,19 @@ build-independent AVIF/JPEG derivatives без runtime optimizer. Reduced-motion
 Service/Breed/PriceRange/PriceRule/ServiceExtra/PricingSelection/FaqItem уже описані
 в types/content.ts; решта контрактів нижче — план наступних milestones. Бізнес-значень немає.
 
-| Модель | Поля та інваріанти |
-| --- | --- |
-| BusinessProfile | name, city, country; optional verified address/phone/email/hours/socials/geo; null для невідомого |
-| Service | id, title, description, petTypes, mediaId, inclusions; лише погоджені послуги |
-| Breed | id, label, petType; explicit «інша/метис/не знаю» як стан запиту, не вигаданий тариф |
-| PriceRule | id, petType, breedId, serviceId, range `{ minMinor, maxMinor, currency: 'UAH' }`, eligibleExtraIds, adjustmentNotes; range null означає quote-required |
-| ServiceExtra | id, title, serviceIds/petTypes, pricing.kind included/additive/quote; range лише для additive |
-| PricingSelection | petType dog/cat або null, breedId/serviceId або null, extraIds[] |
-| PriceEstimate | discriminated status incomplete/available/quote-required/unavailable, range лише для available, reason |
-| Statistic | id, label, value number або null, suffix, precision, evidence reference, verifiedAt |
-| MediaAsset | id, role, dimensions, alt, caption, source reference, approved crops, preview/full URL |
-| Testimonial | id, exact text, permitted display name, source, publication permission; rating лише коли підтверджений |
-| BookingRequest | customerName, petName, petType, breedId або breedText, serviceId, preferredChannel, contactValue, comment? |
+| Модель           | Поля та інваріанти                                                                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| BusinessProfile  | name, city, country; optional verified address/phone/email/hours/socials/geo; null для невідомого                                                      |
+| Service          | id, title, description, petTypes, mediaId, inclusions; лише погоджені послуги                                                                          |
+| Breed            | id, label, petType; explicit «інша/метис/не знаю» як стан запиту, не вигаданий тариф                                                                   |
+| PriceRule        | id, petType, breedId, serviceId, range `{ minMinor, maxMinor, currency: 'UAH' }`, eligibleExtraIds, adjustmentNotes; range null означає quote-required |
+| ServiceExtra     | id, title, serviceIds/petTypes, pricing.kind included/additive/quote; range лише для additive                                                          |
+| PricingSelection | petType dog/cat або null, breedId/serviceId або null, extraIds[]                                                                                       |
+| PriceEstimate    | discriminated status incomplete/available/quote-required/unavailable, range лише для available, reason                                                 |
+| Statistic        | id, label, value number або null, suffix, precision, evidence reference, verifiedAt                                                                    |
+| MediaAsset       | id, role, dimensions, alt, caption, source reference, approved crops, preview/full URL                                                                 |
+| Testimonial      | id, exact text, permitted display name, source, publication permission; rating лише коли підтверджений                                                 |
+| BookingRequest   | customerName, petName, petType, breedId або breedText, serviceId, preferredChannel, contactValue, comment?                                             |
 
 `minMinor/maxMinor` — цілі minor units, не floating money. min ≤ max, nonnegative,
 UAH, унікальні IDs, валідні foreign keys і відсутність дубльованих price rules.
@@ -226,12 +226,12 @@ idempotency key. Зберігати fields при error; pending запобіг�
 Live status один, `aria-busy`, error summary + inline errors. Не зберігати PII у
 localStorage, analytics або URL; не логувати payload. Мінімізувати retention.
 
-| Варіант | Переваги | Обмеження / рішення |
-| --- | --- | --- |
-| HTTPS serverless endpoint + email provider | SSG залишається; контроль валідації й acceptance | Потрібні hosting/account, verified sender, secrets, abuse protection |
-| Nitro server endpoint | Один codebase, приватні server env | Потрібен Node/serverless runtime; не працює на plain static host |
-| Зовнішній form service | Менше власного backend | Перевірити privacy, retention, API, CORS, тарифи, підтвердження доставки |
-| Messenger/email handoff | Може бути окремим contact link | Відкриває застосунок; не submission і не доказ відправлення |
+| Варіант                                    | Переваги                                         | Обмеження / рішення                                                      |
+| ------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------ |
+| HTTPS serverless endpoint + email provider | SSG залишається; контроль валідації й acceptance | Потрібні hosting/account, verified sender, secrets, abuse protection     |
+| Nitro server endpoint                      | Один codebase, приватні server env               | Потрібен Node/serverless runtime; не працює на plain static host         |
+| Зовнішній form service                     | Менше власного backend                           | Перевірити privacy, retention, API, CORS, тарифи, підтвердження доставки |
+| Messenger/email handoff                    | Може бути окремим contact link                   | Відкриває застосунок; не submission і не доказ відправлення              |
 
 Рекомендація: static frontend + невеликий окремий HTTPS endpoint, остаточно після
 вибору hosting та отримувача. Telegram bot — лише server-side adapter з verified

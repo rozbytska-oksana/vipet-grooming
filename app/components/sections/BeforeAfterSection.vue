@@ -532,7 +532,7 @@ onBeforeUnmount(() => {
     & button {
       display: grid;
       place-items: center;
-      width: 30px;
+      width: 44px;
       height: 44px;
       padding: 0;
       border: 0;

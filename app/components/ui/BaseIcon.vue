@@ -11,10 +11,34 @@
     focusable="false"
   >
     <template v-if="name === 'paw'">
-      <ellipse cx="5" cy="9" rx="2" ry="2.7" transform="rotate(-24 5 9)" />
-      <ellipse cx="10" cy="5.5" rx="2" ry="2.7" transform="rotate(-8 10 5.5)" />
-      <ellipse cx="16" cy="5.5" rx="2" ry="2.7" transform="rotate(8 16 5.5)" />
-      <ellipse cx="20" cy="10" rx="1.8" ry="2.5" transform="rotate(24 20 10)" />
+      <ellipse
+        cx="5"
+        cy="9"
+        rx="2"
+        ry="2.7"
+        transform="rotate(-24 5 9)"
+      />
+      <ellipse
+        cx="10"
+        cy="5.5"
+        rx="2"
+        ry="2.7"
+        transform="rotate(-8 10 5.5)"
+      />
+      <ellipse
+        cx="16"
+        cy="5.5"
+        rx="2"
+        ry="2.7"
+        transform="rotate(8 16 5.5)"
+      />
+      <ellipse
+        cx="20"
+        cy="10"
+        rx="1.8"
+        ry="2.5"
+        transform="rotate(24 20 10)"
+      />
       <path d="M6.5 17c0-3 3-6.5 6-6.5s6 3.5 6 6.5c0 4-4 2.3-6 2.3S6.5 21 6.5 17Z" />
     </template>
     <path

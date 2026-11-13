@@ -2,6 +2,7 @@ import process from 'node:process';
 import { resolveSeoSite } from './app/utils/siteSeo';
 
 const githubPages = process.env.VIPET_DEPLOY_TARGET === 'github-pages';
+const hostpro = process.env.VIPET_DEPLOY_TARGET === 'hostpro';
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || '';
 const siteIndexable = !githubPages && process.env.NUXT_PUBLIC_SITE_INDEXABLE === 'true';
 resolveSeoSite(siteUrl, process.env.NUXT_APP_BASE_URL || '/', siteIndexable);
@@ -9,7 +10,8 @@ resolveSeoSite(siteUrl, process.env.NUXT_APP_BASE_URL || '/', siteIndexable);
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: !githubPages },
-  buildDir: githubPages ? '.nuxt-pages' : '.nuxt',
+  // Separate build dirs let deploy builds run while `nuxt dev` uses .nuxt.
+  buildDir: githubPages ? '.nuxt-pages' : hostpro ? '.nuxt-hostpro' : '.nuxt',
   nitro: {
     ...(githubPages ? { output: { dir: '.output-pages' } } : {}),
     prerender: { routes: ['/robots.txt', ...(siteIndexable ? ['/sitemap.xml'] : [])] },

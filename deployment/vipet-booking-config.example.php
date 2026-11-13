@@ -6,5 +6,6 @@ return [
     'bot_token' => '',
     'chat_id' => '',
     // Exact HTTPS origin of the deployed website, without a trailing slash.
-    'allowed_origin' => '',
+    // www is redirected to this origin by public/.htaccess.
+    'allowed_origin' => 'https://vipet-grooming.com.ua',
 ];
