@@ -89,6 +89,14 @@
           </h2>
           <address class="site-footer__address">
             <p v-if="business.address">{{ business.address }}</p>
+            <p v-if="business.phone">
+              <a
+                class="site-footer__phone"
+                :href="`tel:${business.phone.replace(/[^+\d]/g, '')}`"
+              >
+                {{ business.phone }}
+              </a>
+            </p>
             <p v-if="business.email">
               <a :href="`mailto:${business.email}`">{{ business.email }}</a>
             </p>
@@ -346,6 +354,25 @@ const footerLinks = navigationItems.filter((item) => item.available && item.href
   }
   &__address p {
     margin: 0 0 0.75rem;
+  }
+  // Same text style as the address; 44px touch target without extra visual spacing.
+  &__phone {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-block: calc((1.6em - 44px) / 2);
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+    &:focus-visible {
+      outline: 2px solid var(--color-gold-highlight);
+      outline-offset: 3px;
+    }
   }
   &__social-icon {
     display: grid;

@@ -27,7 +27,7 @@ NUXT_APP_BASE_URL. Збірка з активною індексацією й п
 NUXT_PUBLIC_BOOKING_ENABLED налаштовується незалежно після перевірки Telegram.
 
 Для indexable-сайту головна має self-canonical, WebSite/WebPage, LocalBusiness
-і п’ять Service nodes. Дані включають підтверджені адресу, телефон і години
+і шість Service nodes. Дані включають підтверджені адресу, телефон і години
 вівторок–субота 10:00–17:00. Застосовано загальний LocalBusiness. Власний рейтинг
 та FAQ rich-results розмітку не додаємо. JSON-LD екранується перед вставкою в HTML.
 
@@ -183,3 +183,17 @@ contents, контактів чи comment у events. Відсутність traf
 [Service](https://schema.org/Service),
 [Google LocalBusiness guidance](https://developers.google.com/search/docs/appearance/structured-data/local-business),
 [Google documentation updates](https://developers.google.com/search/updates).
+
+## Аудит прод-збірки — 2026-11-13
+
+`generate:hostpro -- --indexable`: title 42 символи, description 130, canonical,
+og:url, sitemap і `.htaccess` спираються на https://vipet-grooming.com.ua/.
+robots `index, follow`, 404 — noindex. JSON-LD LocalBusiness має обов’язкові
+name/address і рекомендовані telephone, url, openingHoursSpecification
+(звірено з документацією Google). Один h1, 63 зображення з alt і розмірами.
+Телефон тепер видимий текстом у футері.
+
+Відкрито: `geo` (координати з точністю від 5 знаків після коми — від власниці
+з Google Maps) та `priceRange` (діапазон погодити з власницею). Після запуску:
+Search Console із sitemap, Rich Results Test, посилання на сайт у Google Business
+Profile та Instagram, Lighthouse mobile.
