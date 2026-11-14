@@ -1,5 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { swipeDirection } from '../app/utils/swipeDirection';
+import { firstMoveIsHorizontal, swipeDirection } from '../app/utils/swipeDirection';
+
+describe('first touch move', () => {
+  it('waits until the finger actually moves', () => {
+    expect(firstMoveIsHorizontal(0, 0)).toBeNull();
+  });
+  it('claims mostly horizontal movement immediately, even a single pixel', () => {
+    expect(firstMoveIsHorizontal(1, 0)).toBe(true);
+    expect(firstMoveIsHorizontal(-3, 1)).toBe(true);
+  });
+  it('leaves vertical or diagonal movement to the browser', () => {
+    expect(firstMoveIsHorizontal(0, 2)).toBe(false);
+    expect(firstMoveIsHorizontal(2, 2)).toBe(false);
+  });
+});
 
 describe('swipe direction', () => {
   it('moves to the next item when the finger moves left', () => {

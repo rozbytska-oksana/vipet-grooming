@@ -126,6 +126,7 @@
         @pointerdown="onSwipeStart"
         @pointerup="onSwipeEnd"
         @pointercancel="onSwipeCancel"
+        @touchstart.passive="onTouchStart"
         @touchmove="onSwipeMove"
       >
         <img
@@ -193,8 +194,7 @@ import { certificates } from '../../data/certificates';
 import type { MediaItem } from '../../types/content';
 import { useCarouselImages } from '../../composables/useCarouselImages';
 import { useReducedMotion } from '../../composables/useReducedMotion';
-import { swipeDirection } from '../../utils/swipeDirection';
-import { isHorizontalDrag } from '../../utils/comparisonSlider';
+import { firstMoveIsHorizontal, swipeDirection } from '../../utils/swipeDirection';
 const baseURL = useRuntimeConfig().app.baseURL;
 const reduced = useReducedMotion();
 const [viewport, api] = emblaCarouselVue(
@@ -306,11 +306,28 @@ const onSwipeCancel = () => {
 // Consume a recognised horizontal swipe, as the carousels do, so in-app browsers such as
 // Telegram's do not treat it as their own "swipe right to close". Pinch-zoomed views and
 // vertical movement stay native.
+// The decision is taken on the very first move, as Embla does: iOS assigns the gesture to
+// the page or to native handlers on the first touchmove, so a later preventDefault is too late.
+let touchIntent: { x: number; y: number; horizontal: boolean | null } | null = null;
+const onTouchStart = (event: TouchEvent) => {
+  const touch = event.touches[0];
+  touchIntent =
+    event.touches.length === 1 && touch
+      ? { x: touch.clientX, y: touch.clientY, horizontal: null }
+      : null;
+};
 const onSwipeMove = (event: TouchEvent) => {
   const touch = event.touches[0];
-  if (!swipe || !touch || event.touches.length > 1 || !event.cancelable) return;
+  if (!touchIntent || !touch || event.touches.length > 1) {
+    touchIntent = null;
+    return;
+  }
   if ((window.visualViewport?.scale ?? 1) > 1.01) return;
-  if (isHorizontalDrag(touch.clientX - swipe.x, touch.clientY - swipe.y)) event.preventDefault();
+  touchIntent.horizontal ??= firstMoveIsHorizontal(
+    touch.clientX - touchIntent.x,
+    touch.clientY - touchIntent.y,
+  );
+  if (touchIntent.horizontal && event.cancelable) event.preventDefault();
 };
 const close = async () => {
   if (!dialog.value?.open || closing) return;

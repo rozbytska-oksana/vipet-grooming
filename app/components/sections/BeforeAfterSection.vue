@@ -251,6 +251,7 @@ import { beforeAfterPairs } from '../../data/before-after';
 import { useReducedMotion } from '../../composables/useReducedMotion';
 import { useScrollReveal } from '../../composables/useScrollReveal';
 import { isHorizontalDrag, positionFromPointer } from '../../utils/comparisonSlider';
+import { firstMoveIsHorizontal } from '../../utils/swipeDirection';
 
 const section = ref<HTMLElement | null>(null);
 useScrollReveal(section);
@@ -340,25 +341,39 @@ const onPointerUp = (event: PointerEvent) => {
 const onPointerCancel = () => {
   drag = null;
 };
-// Once the divider is being dragged, keep the page still for the rest of the touch.
-// Otherwise a slight vertical drift makes iOS Safari start scrolling and cancel the
-// drag mid-gesture. Before a horizontal drag is recognised, scrolling stays native.
-const onTouchMove = (event: TouchEvent) => {
-  if (!drag) return;
+// A horizontal touch keeps the page still until the finger lifts, so a slight vertical
+// drift cannot start a scroll and cancel the drag; a vertical touch scrolls natively.
+// Decided on the first move, as Embla does: iOS assigns the gesture to the page or to
+// native handlers (page scroll, Telegram's swipe-to-close) on the first touchmove.
+let touchIntent: { x: number; y: number; horizontal: boolean | null } | null = null;
+const onTouchStart = (event: TouchEvent) => {
   const touch = event.touches[0];
-  // Safari may deliver touchmove before pointermove; recognise the drag here as well.
-  if (!drag.active && touch && isHorizontalDrag(touch.clientX - drag.x, touch.clientY - drag.y)) {
-    drag.active = true;
-  }
-  if (drag.active && event.cancelable) event.preventDefault();
+  touchIntent =
+    event.touches.length === 1 && touch
+      ? { x: touch.clientX, y: touch.clientY, horizontal: null }
+      : null;
+};
+const onTouchMove = (event: TouchEvent) => {
+  const touch = event.touches[0];
+  if (!touchIntent || !touch || event.touches.length > 1 || both.value) return;
+  touchIntent.horizontal ??= firstMoveIsHorizontal(
+    touch.clientX - touchIntent.x,
+    touch.clientY - touchIntent.y,
+  );
+  if (!touchIntent.horizontal) return;
+  // Safari may deliver touchmove before pointermove; start the drag here as well.
+  if (drag && !drag.active) drag.active = true;
+  if (event.cancelable) event.preventDefault();
 };
 onMounted(() => {
   ready.value = true;
   both.value = false;
+  frame.value?.addEventListener('touchstart', onTouchStart, { passive: true });
   frame.value?.addEventListener('touchmove', onTouchMove, { passive: false });
 });
 onBeforeUnmount(() => {
   if (frameRequest) cancelAnimationFrame(frameRequest);
+  frame.value?.removeEventListener('touchstart', onTouchStart);
   frame.value?.removeEventListener('touchmove', onTouchMove);
   api.value?.off('select', update).off('reInit', update);
 });
