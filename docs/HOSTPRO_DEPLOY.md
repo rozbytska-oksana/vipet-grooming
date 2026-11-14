@@ -62,6 +62,13 @@ npm run generate:hostpro -- --indexable
 `.htaccess` і каталогом `api/`. У файловому менеджері cPanel увімкнути показ
 прихованих файлів.
 
+cPanel створює в `public_html/.htaccess` власний блок між
+`# BEGIN cPanel-generated php ini directives` і `# END …` (зараз — шлях до
+логу помилок PHP у `logs/php.error.log`). Цей блок не потрапляє в репозиторій,
+бо містить ім’я акаунта. Перед кожним завантаженням скопіювати його з сервера
+на початок `.output/public/.htaccess` або після розпакування повернути на сервері
+на початок файлу. Не видаляти `php.ini`, `.user.ini` і `cgi-bin` у `public_html`.
+
 ## 5. Перевірка після завантаження
 
 - `http://vipet-grooming.com.ua` і `https://www.vipet-grooming.com.ua` одним

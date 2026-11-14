@@ -28,10 +28,16 @@ export default defineNuxtConfig({
             'gsap',
             'ScrollTrigger',
             'embla-carousel-vue.esm',
+            'ServicesSection',
             'GroomerSection',
             'BeforeAfterSection',
+            'PricingSection',
+            'PhilosophySection',
             'PetGallerySection',
+            'BeforeVisitSection',
             'TestimonialsSection',
+            'SalonRulesSection',
+            'FaqSection',
           ].includes(chunk.name || '')
         ) {
           chunk.preload = false;

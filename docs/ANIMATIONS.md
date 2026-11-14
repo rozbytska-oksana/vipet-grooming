@@ -143,3 +143,10 @@ Header/Hero v1 використовує CSS: text translateY 16px без opacity
 Halo/ribbon статичні. GSAP/parallax/layered photo reveal наразі не реалізовані:
 тимчасова фотографія є одним зображенням. Actual reduced-motion/browser rendering
 ще не перевірене через недоступність Computer Use; це не виконаний motion QA.
+
+## Hero entrance — уточнення 2026-11-14
+
+CSS-вхід hero до 1200px стиснуто приблизно до 1,4 с (літери 0,6 с зі stagger
+60 мс, текст і цінності — до ~1,3 с), щоб перший екран на повільному мобільному
+інтернеті ставав візуально завершеним раніше (Speed Index/LCP). Від 1200px діє
+початкова хореографія ~3,3 с. Reduced motion — без анімації, як і раніше.

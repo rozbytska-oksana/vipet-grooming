@@ -11,8 +11,19 @@ try {
     body: JSON.stringify({ allowed_updates: ['message'], timeout: 0 }),
     signal: AbortSignal.timeout(10000),
   });
-  const data = await response.json();
-  if (!response.ok || data.ok !== true) throw new Error('Telegram request failed');
+  const data = await response.json().catch(() => null);
+  if (!response.ok || data?.ok !== true) {
+    // Telegram descriptions never contain the token.
+    const reason = `HTTP ${response.status}${data?.description ? `: ${data.description}` : ''}`;
+    const hints = {
+      401: 'The token is wrong or was revoked. Copy it again from @BotFather into .env.',
+      404: 'The token is wrong. Copy it again from @BotFather into .env.',
+      409: 'A webhook is set for this bot. Remove it or use a dedicated bot.',
+    };
+    console.error(`Telegram refused the request (${reason}).`);
+    if (hints[response.status]) console.error(hints[response.status]);
+    process.exit(1);
+  }
   const chats = new Map();
   for (const update of data.result ?? []) {
     const chat = update.message?.chat;
@@ -22,9 +33,10 @@ try {
     console.log('Open the bot in the owner’s Telegram, press Start and run this command again.');
   }
   for (const [id, type] of chats) console.log(`Chat ID: ${id} (${type})`);
-} catch {
+} catch (error) {
+  const code = error?.cause?.code || error?.name || 'unknown';
   console.error(
-    'Could not retrieve chat IDs. Check the token, connection and that this is a dedicated bot without an existing webhook.',
+    `Could not reach api.telegram.org (${code}). Check the internet connection or VPN.`,
   );
   process.exitCode = 1;
 }

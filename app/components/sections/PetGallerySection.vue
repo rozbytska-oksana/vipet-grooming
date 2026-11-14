@@ -52,7 +52,6 @@
               class="pet-gallery__slide"
               :class="{
                 'pet-gallery__slide--active': selected === index,
-                'pet-gallery__slide--nearby': isNearby(index),
               }"
               role="group"
               aria-roledescription="слайд"
@@ -143,11 +142,6 @@ const section = ref<HTMLElement | null>(null);
 const reduced = useReducedMotion();
 useScrollReveal(section);
 const selected = ref(0);
-const settled = ref(0);
-const isNearby = (index: number) => {
-  const distance = Math.abs(settled.value - index);
-  return Math.min(distance, groomingVideos.length - distance) <= 2;
-};
 const visibleDots = computed(() => {
   const count = Math.min(5, groomingVideos.length);
   const start = Math.max(0, Math.min(selected.value - 2, groomingVideos.length - count));
@@ -171,9 +165,6 @@ const options = computed(() => ({
 }));
 const [viewport, api] = emblaCarouselVue(options);
 useCarouselImages(viewport);
-const onSettle = () => {
-  settled.value = api.value?.selectedScrollSnap() ?? 0;
-};
 let playingVideo: HTMLVideoElement | null = null;
 let playingIndex = -1;
 const pause = (except = -1) => {
@@ -190,8 +181,8 @@ const onPlay = (index: number, player: HTMLVideoElement) => {
   api.value?.scrollTo(index, reduced.value);
 };
 watch(api, (value, previous) => {
-  previous?.off('select', update).off('reInit', update).off('settle', onSettle);
-  value?.on('select', update).on('reInit', update).on('settle', onSettle);
+  previous?.off('select', update).off('reInit', update);
+  value?.on('select', update).on('reInit', update);
   update();
 });
 let observer: IntersectionObserver | undefined;
@@ -212,7 +203,7 @@ onBeforeUnmount(() => {
   playingVideo = null;
   observer?.disconnect();
   document.removeEventListener('visibilitychange', onVisibility);
-  api.value?.off('select', update).off('reInit', update).off('settle', onSettle);
+  api.value?.off('select', update).off('reInit', update);
 });
 </script>
 
@@ -267,6 +258,9 @@ onBeforeUnmount(() => {
   }
 
   &__slide {
+    // A static stacking context: switching the active slide only reorders layers.
+    position: relative;
+    z-index: 0;
     flex: 0 0 78%;
     min-width: 0;
     margin: 0 1.25rem 0 0;
@@ -286,7 +280,6 @@ onBeforeUnmount(() => {
   }
 
   &__slide--active {
-    position: relative;
     z-index: 1;
   }
 
@@ -371,11 +364,10 @@ onBeforeUnmount(() => {
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    &__slide--nearby &__frame {
-      will-change: transform;
-    }
-
+    // Permanent layers: toggling will-change after each swipe re-rastered the posters
+    // and caused a short freeze on mobile. Off-screen layers are tiled lazily.
     &__frame {
+      will-change: transform;
       transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
     }
   }

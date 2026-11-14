@@ -6,17 +6,20 @@
       tabindex="-1"
     >
       <HeroSection />
-      <ServicesSection />
+      <ServicesSection :hydrate-on-visible="{ rootMargin: '300px' }" />
       <GroomerSection :hydrate-on-visible="{ rootMargin: '300px' }" />
       <BeforeAfterSection :hydrate-on-visible="{ rootMargin: '300px' }" />
-      <PricingSection @booking="prefillBooking" />
-      <PhilosophySection />
+      <PricingSection
+        :hydrate-on-visible="{ rootMargin: '300px' }"
+        @booking="prefillBooking"
+      />
+      <PhilosophySection :hydrate-on-visible="{ rootMargin: '300px' }" />
       <PetGallerySection :hydrate-on-visible="{ rootMargin: '300px' }" />
-      <BeforeVisitSection />
+      <BeforeVisitSection :hydrate-on-visible="{ rootMargin: '300px' }" />
       <BookingSection :prefill="selection" />
       <TestimonialsSection :hydrate-on-visible="{ rootMargin: '300px' }" />
-      <SalonRulesSection />
-      <FaqSection />
+      <SalonRulesSection :hydrate-on-visible="{ rootMargin: '300px' }" />
+      <FaqSection :hydrate-on-visible="{ rootMargin: '300px' }" />
     </main>
     <SiteFooter />
     <span
@@ -35,8 +38,13 @@ import type { PricingSelection } from '../types/content';
 import SiteHeader from '../components/layout/SiteHeader.vue';
 import SiteFooter from '../components/layout/SiteFooter.vue';
 import HeroSection from '../components/sections/HeroSection.vue';
-import PhilosophySection from '../components/sections/PhilosophySection.vue';
-import ServicesSection from '../components/sections/ServicesSection.vue';
+// Header CTA and the calculator move focus into the form, so it hydrates eagerly.
+import BookingSection from '../components/sections/BookingSection.vue';
+// Below-the-fold sections stay in the SSR HTML; their JS loads near the viewport.
+const ServicesSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/ServicesSection.vue'),
+);
 const GroomerSection = defineLazyHydrationComponent(
   'visible',
   () => import('../components/sections/GroomerSection.vue'),
@@ -45,19 +53,34 @@ const BeforeAfterSection = defineLazyHydrationComponent(
   'visible',
   () => import('../components/sections/BeforeAfterSection.vue'),
 );
+const PricingSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/PricingSection.vue'),
+);
+const PhilosophySection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/PhilosophySection.vue'),
+);
 const PetGallerySection = defineLazyHydrationComponent(
   'visible',
   () => import('../components/sections/PetGallerySection.vue'),
 );
-import PricingSection from '../components/sections/PricingSection.vue';
+const BeforeVisitSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/BeforeVisitSection.vue'),
+);
 const TestimonialsSection = defineLazyHydrationComponent(
   'visible',
   () => import('../components/sections/TestimonialsSection.vue'),
 );
-import FaqSection from '../components/sections/FaqSection.vue';
-import BeforeVisitSection from '../components/sections/BeforeVisitSection.vue';
-import SalonRulesSection from '../components/sections/SalonRulesSection.vue';
-import BookingSection from '../components/sections/BookingSection.vue';
+const SalonRulesSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/SalonRulesSection.vue'),
+);
+const FaqSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('../components/sections/FaqSection.vue'),
+);
 const selection = ref<PricingSelection | null>(null);
 const openBooking = () => {
   const target = document.getElementById('booking-title');

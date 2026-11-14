@@ -798,62 +798,124 @@ useHead({
 
 // Render-blocking component CSS starts the entrance before hydration or GSAP imports.
 // Backwards fill covers each delay; the underlying styles restore final opacity/transform.
+// Mobile/tablet use a compressed timeline (~1.4s) so the first screen is visually complete
+// sooner on slow networks (Speed Index/LCP); x-large keeps the original ~3.3s choreography.
 @media (prefers-reduced-motion: no-preference) {
   .hero {
     &__light {
-      animation: hero-fade-in 1.2s ease-out backwards;
+      animation: hero-fade-in 0.8s ease-out backwards;
     }
 
     &__eyebrow {
-      animation: hero-rise-in 1.25s ease-out 0.2s backwards;
+      animation: hero-rise-in 0.6s ease-out 0.05s backwards;
     }
 
     &__letter {
-      animation: hero-rise-in 0.95s ease-out backwards;
-      animation-delay: calc(0.45s + var(--letter-index) * 0.17s);
+      animation: hero-rise-in 0.6s ease-out backwards;
+      animation-delay: calc(0.1s + var(--letter-index) * 0.06s);
     }
 
     &__divider {
-      animation: hero-line-in 1.4s ease-out 1s backwards;
+      animation: hero-line-in 0.8s ease-out 0.35s backwards;
     }
 
     &__image {
-      animation: hero-image-in 2s ease-out backwards;
+      animation: hero-image-in 0.9s ease-out backwards;
     }
 
     &__description {
-      animation: hero-rise-in 1.5s ease-out 1.15s backwards;
+      animation: hero-rise-in 0.8s ease-out 0.3s backwards;
     }
 
     &__lead {
-      animation: hero-rise-in 1.2s ease-out 1.55s backwards;
+      animation: hero-rise-in 0.7s ease-out 0.45s backwards;
     }
 
     &__ribbon path,
     &__left-waves path {
-      animation: hero-stroke-in 1.7s ease-out 1.3s backwards;
+      animation: hero-stroke-in 1s ease-out 0.4s backwards;
     }
 
     &__left-waves ellipse {
-      animation: hero-fade-in 1.6s ease-out 1.5s backwards;
+      animation: hero-fade-in 1s ease-out 0.5s backwards;
     }
 
     &__particles i {
-      animation: hero-rise-in 1.1s ease-out backwards;
+      animation: hero-rise-in 0.7s ease-out backwards;
 
       @for $index from 1 through 7 {
         &:nth-child(#{$index}) {
-          animation-delay: #{1.65 + ($index - 1) * 0.1}s;
+          animation-delay: #{0.6 + ($index - 1) * 0.06}s;
         }
       }
     }
 
     &__value {
-      animation: hero-rise-in 1.1s ease-out backwards;
+      animation: hero-rise-in 0.7s ease-out backwards;
 
       @for $index from 1 through 3 {
         &:nth-child(#{$index}) {
-          animation-delay: #{1.9 + ($index - 1) * 0.16}s;
+          animation-delay: #{0.6 + ($index - 1) * 0.1}s;
+        }
+      }
+    }
+
+    @include bp.x-large {
+      &__light {
+        animation: hero-fade-in 1.2s ease-out backwards;
+      }
+
+      &__eyebrow {
+        animation: hero-rise-in 1.25s ease-out 0.2s backwards;
+      }
+
+      &__letter {
+        animation: hero-rise-in 0.95s ease-out backwards;
+        animation-delay: calc(0.45s + var(--letter-index) * 0.17s);
+      }
+
+      &__divider {
+        animation: hero-line-in 1.4s ease-out 1s backwards;
+      }
+
+      &__image {
+        animation: hero-image-in 2s ease-out backwards;
+      }
+
+      &__description {
+        animation: hero-rise-in 1.5s ease-out 1.15s backwards;
+      }
+
+      &__lead {
+        animation: hero-rise-in 1.2s ease-out 1.55s backwards;
+      }
+
+      &__ribbon path,
+      &__left-waves path {
+        animation: hero-stroke-in 1.7s ease-out 1.3s backwards;
+      }
+
+      &__left-waves ellipse {
+        animation: hero-fade-in 1.6s ease-out 1.5s backwards;
+      }
+
+      &__particles i {
+        animation: hero-rise-in 1.1s ease-out backwards;
+
+        @for $index from 1 through 7 {
+          &:nth-child(#{$index}) {
+            animation-delay: #{1.65 + ($index - 1) * 0.1}s;
+          }
+        }
+      }
+
+      &__value {
+        animation: hero-rise-in 1.1s ease-out backwards;
+
+        @for $index from 1 through 3 {
+          &:nth-child(#{$index}) {
+            animation-delay: #{1.9 + ($index - 1) * 0.16}s;
+          }
         }
       }
     }

@@ -24,7 +24,6 @@
           :class="{
             'certificates__slide--landscape': item.width > item.height,
             'certificates__slide--active': selected === index,
-            'certificates__slide--nearby': isNearby(index),
           }"
         >
           <a
@@ -203,14 +202,6 @@ const [viewport, api] = emblaCarouselVue(
   })),
 );
 useCarouselImages(viewport);
-const settled = ref(0);
-const isNearby = (index: number) => {
-  const distance = Math.abs(settled.value - index);
-  return Math.min(distance, certificates.length - distance) <= 2;
-};
-const onSettle = () => {
-  settled.value = api.value?.selectedScrollSnap() ?? 0;
-};
 const selected = ref(0),
   snaps = ref<number[]>([]),
   canPrevious = ref(false),
@@ -222,8 +213,8 @@ const update = () => {
   canNext.value = api.value?.canScrollNext() ?? false;
 };
 watch(api, (value, previous) => {
-  previous?.off('select', update).off('reInit', update).off('settle', onSettle);
-  value?.on('select', update).on('reInit', update).on('settle', onSettle);
+  previous?.off('select', update).off('reInit', update);
+  value?.on('select', update).on('reInit', update);
   update();
 });
 const sizes = '(min-width: 1200px) 15vw, (min-width: 768px) 34vw, 68vw';
@@ -317,7 +308,7 @@ onBeforeUnmount(() => {
     dialog.value.close();
     restore();
   }
-  api.value?.off('select', update).off('reInit', update).off('settle', onSettle);
+  api.value?.off('select', update).off('reInit', update);
 });
 </script>
 
@@ -351,6 +342,9 @@ onBeforeUnmount(() => {
     touch-action: pan-y pinch-zoom;
   }
   &__slide {
+    // A static stacking context: switching the active slide only reorders layers.
+    position: relative;
+    z-index: 0;
     flex: 0 0 62%;
     min-width: 0;
     margin: 0 0.75rem 0 0;
@@ -358,7 +352,6 @@ onBeforeUnmount(() => {
       flex-basis: calc((100% - 1.5rem) / 3);
     }
     &--active {
-      position: relative;
       z-index: 1;
       .certificates__frame {
         transform: scale(1.1);
@@ -368,17 +361,17 @@ onBeforeUnmount(() => {
       }
     }
   }
-  &__slide--nearby &__frame {
-    @media (prefers-reduced-motion: no-preference) {
-      will-change: transform;
-    }
-  }
   &__frame {
     display: block;
     width: 100%;
     margin-inline: auto;
     transform: scale(0.98);
     transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    // Permanent layers: toggling will-change after each swipe re-rastered shadows and
+    // filtered images and caused a short freeze on mobile.
+    @media (prefers-reduced-motion: no-preference) {
+      will-change: transform;
+    }
     @media (prefers-reduced-motion: reduce) {
       transform: none;
       transition: none;
