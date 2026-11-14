@@ -340,12 +340,26 @@ const onPointerUp = (event: PointerEvent) => {
 const onPointerCancel = () => {
   drag = null;
 };
+// Once the divider is being dragged, keep the page still for the rest of the touch.
+// Otherwise a slight vertical drift makes iOS Safari start scrolling and cancel the
+// drag mid-gesture. Before a horizontal drag is recognised, scrolling stays native.
+const onTouchMove = (event: TouchEvent) => {
+  if (!drag) return;
+  const touch = event.touches[0];
+  // Safari may deliver touchmove before pointermove; recognise the drag here as well.
+  if (!drag.active && touch && isHorizontalDrag(touch.clientX - drag.x, touch.clientY - drag.y)) {
+    drag.active = true;
+  }
+  if (drag.active && event.cancelable) event.preventDefault();
+};
 onMounted(() => {
   ready.value = true;
   both.value = false;
+  frame.value?.addEventListener('touchmove', onTouchMove, { passive: false });
 });
 onBeforeUnmount(() => {
   if (frameRequest) cancelAnimationFrame(frameRequest);
+  frame.value?.removeEventListener('touchmove', onTouchMove);
   api.value?.off('select', update).off('reInit', update);
 });
 </script>
