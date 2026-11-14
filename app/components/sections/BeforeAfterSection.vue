@@ -100,15 +100,22 @@
                 </figure>
                 <figure
                   class="comparison__photo comparison__photo--after"
-                  :style="both ? {} : { clipPath: `inset(0 0 0 ${position}%)` }"
+                  :style="both ? {} : { transform: `translateX(${position}%)` }"
                 >
-                  <ComparisonPhoto
-                    :id="active.id"
-                    role="after"
-                    :width="active.after.width"
-                    :height="active.after.height"
-                    :alt="`Той самий улюбленець після грумінгу, пара ${selected + 1}`"
-                  />
+                  <!-- The window slides right while the photo slides back: GPU transforms only,
+                       no repaint of the large photo on every pointer move. -->
+                  <div
+                    class="comparison__after-photo"
+                    :style="both ? {} : { transform: `translateX(-${position}%)` }"
+                  >
+                    <ComparisonPhoto
+                      :id="active.id"
+                      role="after"
+                      :width="active.after.width"
+                      :height="active.after.height"
+                      :alt="`Той самий улюбленець після грумінгу, пара ${selected + 1}`"
+                    />
+                  </div>
                 </figure>
               </div>
             </Transition>
@@ -117,7 +124,7 @@
             <template v-if="ready && !both">
               <span
                 class="comparison__divider"
-                :style="{ left: `${position}%` }"
+                :style="{ transform: `translateX(${position}%)` }"
                 aria-hidden="true"
               >
                 <span class="comparison__handle">
@@ -267,8 +274,11 @@ const visibleSnaps = computed(() => {
   return Array.from({ length: count }, (_, index) => start + index);
 });
 const update = () => {
-  selected.value = api.value?.selectedScrollSnap() ?? 0;
-  position.value = 50;
+  const next = api.value?.selectedScrollSnap() ?? 0;
+  // reInit also fires when the mobile URL bar resizes the viewport during scrolling;
+  // only a different pair re-centres the divider.
+  if (next !== selected.value) position.value = 50;
+  selected.value = next;
 };
 watch(api, (value, previous) => {
   previous?.off('select', update).off('reInit', update);
@@ -281,9 +291,20 @@ watch(api, (value, previous) => {
 const frame = ref<HTMLElement | null>(null);
 const range = ref<HTMLInputElement | null>(null);
 let drag: { id: number; x: number; y: number; active: boolean } | null = null;
+let pendingX: number | null = null;
+let frameRequest = 0;
+// Touch screens report moves faster than the display refreshes; apply one per frame.
 const moveTo = (clientX: number) => {
-  const rect = frame.value?.getBoundingClientRect();
-  if (rect) position.value = positionFromPointer(clientX, rect.left, rect.width);
+  pendingX = clientX;
+  if (frameRequest) return;
+  frameRequest = requestAnimationFrame(() => {
+    frameRequest = 0;
+    const rect = frame.value?.getBoundingClientRect();
+    if (rect && pendingX !== null) {
+      position.value = positionFromPointer(pendingX, rect.left, rect.width);
+    }
+    pendingX = null;
+  });
 };
 const onPointerDown = (event: PointerEvent) => {
   if (both.value || !ready.value || !event.isPrimary) return;
@@ -324,6 +345,7 @@ onMounted(() => {
   both.value = false;
 });
 onBeforeUnmount(() => {
+  if (frameRequest) cancelAnimationFrame(frameRequest);
   api.value?.off('select', update).off('reInit', update);
 });
 </script>
@@ -477,19 +499,38 @@ onBeforeUnmount(() => {
       right: 0.8rem;
     }
   }
+  // Full-width layer moved by translateX(position%); the line sits at its left edge.
   &__divider {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #ffe9b0;
-    box-shadow: 0 0 8px rgb(80 55 20 / 40%);
+    inset: 0;
     pointer-events: none;
+    will-change: transform;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -1px;
+      width: 2px;
+      background: #ffe9b0;
+      box-shadow: 0 0 8px rgb(80 55 20 / 40%);
+    }
+  }
+  &__photo--after {
+    overflow: hidden;
+  }
+  &__after-photo {
+    width: 100%;
+    height: 100%;
+  }
+  &__frame:not(&__frame--both) &__photo--after,
+  &__frame:not(&__frame--both) &__after-photo {
+    will-change: transform;
   }
   &__handle {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 0;
     display: grid;
     place-items: center;
     width: 44px;
@@ -641,7 +682,7 @@ onBeforeUnmount(() => {
   }
 }
 @media (forced-colors: active) {
-  .comparison__divider,
+  .comparison__divider::before,
   .comparison__dots button span {
     background: CanvasText;
   }

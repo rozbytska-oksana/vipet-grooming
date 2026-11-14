@@ -149,6 +149,8 @@ const visibleDots = computed(() => {
     .slice(start, start + count)
     .map((item, index) => ({ ...item, index: start + index }));
 });
+// Height (px) of the native video timeline area kept for seeking on touch devices.
+const videoTimelineZone = 72;
 const options = computed(() => ({
   loop: true,
   align: 'center' as const,
@@ -160,6 +162,14 @@ const options = computed(() => ({
     // The transparent playback button forwards drags to Embla; its click is
     // automatically suppressed by Embla after a drag. Native controls stay free.
     if (target.closest('.grooming-video__gesture')) return true;
+    const video = target.closest('video');
+    if (video && 'touches' in event) {
+      // Touch: a horizontal swipe on a started video switches slides. Taps still reach
+      // the native controls (Embla never cancels touchstart), and the bottom strip
+      // with the native timeline stays free for seeking.
+      const touch = event.touches[0];
+      return !!touch && touch.clientY < video.getBoundingClientRect().bottom - videoTimelineZone;
+    }
     return !target.closest('video, button, input, select, textarea');
   },
 }));
