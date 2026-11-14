@@ -98,3 +98,22 @@ cPanel створює в `public_html/.htaccess` власний блок між
 перевірити error log у cPanel. Найімовірніша причина — заборонена директива `Options`.
 
 У GitHub Pages збірку `.htaccess` не потрапляє: `generate:pages` його видаляє.
+
+## Стан деплою — 14 листопада 2026
+
+Сайт опубліковано на https://vipet-grooming.com.ua (дата-центр Польща, PHP 8.4,
+Let's Encrypt через AutoSSL). Перевірено: редиректи HTTP/www → HTTPS без www,
+404, закритий `.htaccess`, кешування, `booking.php` читає приватний конфіг.
+Тестову заявку з форми користувачка надіслала — повідомлення дійшло в Telegram
+власниці, отже вихідні запити до `api.telegram.org` дозволені, токен і chat ID
+правильні.
+
+Того ж дня завантажено публічну збірку `generate:hostpro -- --indexable`:
+`index.html` на сервері ідентичний збірці, `index, follow`, canonical
+https://vipet-grooming.com.ua/, один блок JSON-LD, `robots.txt` із Sitemap,
+`sitemap.xml` (200, application/xml), без `X-Robots-Tag`, усі `/_nuxt/` ресурси 200.
+
+Відкрито: стиснення відповідей (Nginx не передає Accept-Encoding до Apache;
+запит до підтримки HostPro), Google Search Console (підтвердження домену,
+sitemap, запит на індексування), посилання на сайт у Google Business Profile
+та Instagram, повторний PageSpeed після ввімкнення стиснення.
