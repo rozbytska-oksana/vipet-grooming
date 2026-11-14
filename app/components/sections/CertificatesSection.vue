@@ -126,10 +126,11 @@
         @pointerdown="onSwipeStart"
         @pointerup="onSwipeEnd"
         @pointercancel="onSwipeCancel"
+        @touchmove="onSwipeMove"
       >
         <img
           class="certificates__preview"
-          :src="`${baseURL}${active.src}`"
+          :src="previewSrc || `${baseURL}${active.src}`"
           alt=""
           aria-hidden="true"
           :width="active.width"
@@ -193,6 +194,7 @@ import type { MediaItem } from '../../types/content';
 import { useCarouselImages } from '../../composables/useCarouselImages';
 import { useReducedMotion } from '../../composables/useReducedMotion';
 import { swipeDirection } from '../../utils/swipeDirection';
+import { isHorizontalDrag } from '../../utils/comparisonSlider';
 const baseURL = useRuntimeConfig().app.baseURL;
 const reduced = useReducedMotion();
 const [viewport, api] = emblaCarouselVue(
@@ -229,6 +231,12 @@ const sources = (src: string, format: string) =>
 const dialog = ref<HTMLDialogElement | null>(null);
 const fullReady = ref(false);
 const active = ref<MediaItem | null>(null);
+// The dialog preview reuses the card image the carousel already loaded (AVIF/WebP at the
+// chosen width), so it appears instantly while the full-size file downloads.
+const previewSrc = ref('');
+const loadedCardSrc = (index: number) =>
+  viewport.value?.querySelectorAll<HTMLImageElement>('.certificates__slide img')[index]
+    ?.currentSrc ?? '';
 let trigger: HTMLElement | null = null,
   animation: Animation | null = null,
   disposed = false,
@@ -247,6 +255,7 @@ const open = async (event: MouseEvent, item: MediaItem) => {
   trigger = event.currentTarget as HTMLElement;
   const origin = trigger.getBoundingClientRect();
   fullReady.value = false;
+  previewSrc.value = loadedCardSrc(certificates.findIndex((entry) => entry.id === item.id));
   active.value = item;
   await nextTick();
   if (disposed || !dialog.value) return;
@@ -271,6 +280,7 @@ const navigate = (direction: number) => {
   const index = certificates.findIndex((item) => item.id === active.value?.id);
   const nextIndex = (index + direction + certificates.length) % certificates.length;
   fullReady.value = false;
+  previewSrc.value = loadedCardSrc(nextIndex);
   active.value = certificates[nextIndex] ?? null;
   api.value?.scrollTo(nextIndex, reduced.value);
 };
@@ -292,6 +302,15 @@ const onSwipeEnd = (event: PointerEvent) => {
 };
 const onSwipeCancel = () => {
   swipe = null;
+};
+// Consume a recognised horizontal swipe, as the carousels do, so in-app browsers such as
+// Telegram's do not treat it as their own "swipe right to close". Pinch-zoomed views and
+// vertical movement stay native.
+const onSwipeMove = (event: TouchEvent) => {
+  const touch = event.touches[0];
+  if (!swipe || !touch || event.touches.length > 1 || !event.cancelable) return;
+  if ((window.visualViewport?.scale ?? 1) > 1.01) return;
+  if (isHorizontalDrag(touch.clientX - swipe.x, touch.clientY - swipe.y)) event.preventDefault();
 };
 const close = async () => {
   if (!dialog.value?.open || closing) return;
