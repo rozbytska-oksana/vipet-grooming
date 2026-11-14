@@ -61,6 +61,11 @@
             >
               {{ both ? 'Порівняти повзунком' : 'Показати фото поруч' }}
             </button>
+            <span
+              v-else
+              class="comparison__mode comparison__mode--placeholder"
+              aria-hidden="true"
+            />
           </div>
         </header>
         <div
@@ -68,8 +73,13 @@
           data-reveal
         >
           <div
+            ref="frame"
             class="comparison__frame"
             :class="{ 'comparison__frame--both': both }"
+            @pointerdown="onPointerDown"
+            @pointermove="onPointerMove"
+            @pointerup="onPointerUp"
+            @pointercancel="onPointerCancel"
           >
             <Transition
               name="comparison-change"
@@ -120,6 +130,7 @@
                 </span>
               </span>
               <input
+                ref="range"
                 v-model.number="position"
                 class="comparison__range"
                 type="range"
@@ -232,6 +243,7 @@ import ComparisonPhoto from '../before-after/ComparisonPhoto.vue';
 import { beforeAfterPairs } from '../../data/before-after';
 import { useReducedMotion } from '../../composables/useReducedMotion';
 import { useScrollReveal } from '../../composables/useScrollReveal';
+import { isHorizontalDrag, positionFromPointer } from '../../utils/comparisonSlider';
 
 const section = ref<HTMLElement | null>(null);
 useScrollReveal(section);
@@ -263,6 +275,50 @@ watch(api, (value, previous) => {
   value?.on('select', update).on('reInit', update);
   update();
 });
+// Pointer input over the whole photo, the same on desktop and touch. Mobile browsers
+// only let a native range move by its small thumb, so the range keeps keyboard and
+// assistive-technology input while pointers are handled here.
+const frame = ref<HTMLElement | null>(null);
+const range = ref<HTMLInputElement | null>(null);
+let drag: { id: number; x: number; y: number; active: boolean } | null = null;
+const moveTo = (clientX: number) => {
+  const rect = frame.value?.getBoundingClientRect();
+  if (rect) position.value = positionFromPointer(clientX, rect.left, rect.width);
+};
+const onPointerDown = (event: PointerEvent) => {
+  if (both.value || !ready.value || !event.isPrimary) return;
+  if (event.pointerType === 'mouse') {
+    if (event.button !== 0) return;
+    // Mouse: jump immediately and drag; also stops native image dragging.
+    event.preventDefault();
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY, active: true };
+    frame.value?.setPointerCapture(event.pointerId);
+    range.value?.focus({ preventScroll: true });
+    moveTo(event.clientX);
+    return;
+  }
+  // Touch/pen: wait to see whether this is a tap, a horizontal drag or a page scroll.
+  drag = { id: event.pointerId, x: event.clientX, y: event.clientY, active: false };
+};
+const onPointerMove = (event: PointerEvent) => {
+  if (!drag || event.pointerId !== drag.id) return;
+  if (!drag.active) {
+    if (!isHorizontalDrag(event.clientX - drag.x, event.clientY - drag.y)) return;
+    drag.active = true;
+    frame.value?.setPointerCapture(event.pointerId);
+  }
+  moveTo(event.clientX);
+};
+const onPointerUp = (event: PointerEvent) => {
+  if (!drag || event.pointerId !== drag.id) return;
+  // A tap without movement places the divider where the finger touched.
+  if (!drag.active) moveTo(event.clientX);
+  drag = null;
+};
+// The browser cancels the pointer when it takes over for vertical scrolling.
+const onPointerCancel = () => {
+  drag = null;
+};
 onMounted(() => {
   ready.value = true;
   both.value = false;
@@ -332,16 +388,23 @@ onBeforeUnmount(() => {
       margin-inline: 0;
     }
   }
+  // Mobile: the hint and mode toggle belong to the photo, so they sit apart from the
+  // intro and close to the frame. The placeholder keeps the toggle's space before
+  // hydration, so nothing shifts when the real button appears.
   &__interaction {
-    min-height: 7rem;
+    margin-top: 2.25rem;
+    @include bp.medium {
+      margin-top: 1rem;
+    }
   }
   &__hint {
-    margin: 1rem 0 0;
+    margin: 0;
     font-size: 1rem;
     color: var(--text-secondary);
   }
   &__mode {
-    margin-top: 0.75rem;
+    display: inline-block;
+    margin-top: 0.25rem;
     padding: 0.5rem 0;
     min-height: 44px;
     border: 0;
@@ -350,6 +413,13 @@ onBeforeUnmount(() => {
     text-decoration: underline;
     text-underline-offset: 0.3em;
     font: inherit;
+    @include bp.medium {
+      margin-top: 0.75rem;
+    }
+    &--placeholder {
+      display: block;
+      visibility: hidden;
+    }
   }
   &__viewer {
     min-width: 0;
@@ -434,6 +504,7 @@ onBeforeUnmount(() => {
       stroke-width: 1.5;
     }
   }
+  // Pointers are handled by the frame; the range stays for keyboard and screen readers.
   &__range {
     position: absolute;
     inset: 0;
@@ -442,8 +513,13 @@ onBeforeUnmount(() => {
     height: 100%;
     margin: 0;
     opacity: 0;
+    pointer-events: none;
+  }
+  &__frame:not(&__frame--both) {
     cursor: ew-resize;
-    touch-action: pan-y;
+    touch-action: pan-y pinch-zoom;
+    user-select: none;
+    -webkit-user-select: none;
   }
   &__viewport {
     margin-top: 1.5rem;

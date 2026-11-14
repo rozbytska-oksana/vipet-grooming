@@ -123,6 +123,9 @@
         tabindex="-1"
         autofocus
         :style="{ '--certificate-ratio': active.width / active.height }"
+        @pointerdown="onSwipeStart"
+        @pointerup="onSwipeEnd"
+        @pointercancel="onSwipeCancel"
       >
         <img
           class="certificates__preview"
@@ -189,6 +192,7 @@ import { certificates } from '../../data/certificates';
 import type { MediaItem } from '../../types/content';
 import { useCarouselImages } from '../../composables/useCarouselImages';
 import { useReducedMotion } from '../../composables/useReducedMotion';
+import { swipeDirection } from '../../utils/swipeDirection';
 const baseURL = useRuntimeConfig().app.baseURL;
 const reduced = useReducedMotion();
 const [viewport, api] = emblaCarouselVue(
@@ -269,6 +273,25 @@ const navigate = (direction: number) => {
   fullReady.value = false;
   active.value = certificates[nextIndex] ?? null;
   api.value?.scrollTo(nextIndex, reduced.value);
+};
+// Touch swipe inside the dialog; buttons and arrow keys stay the primary controls.
+let swipe: { id: number; x: number; y: number } | null = null;
+const onSwipeStart = (event: PointerEvent) => {
+  if (event.pointerType === 'mouse' || !event.isPrimary) return;
+  swipe = { id: event.pointerId, x: event.clientX, y: event.clientY };
+};
+const onSwipeEnd = (event: PointerEvent) => {
+  if (!swipe || event.pointerId !== swipe.id) return;
+  const direction = swipeDirection(
+    event.clientX - swipe.x,
+    event.clientY - swipe.y,
+    window.visualViewport?.scale ?? 1,
+  );
+  swipe = null;
+  if (direction) navigate(direction);
+};
+const onSwipeCancel = () => {
+  swipe = null;
 };
 const close = async () => {
   if (!dialog.value?.open || closing) return;
@@ -471,6 +494,10 @@ onBeforeUnmount(() => {
     aspect-ratio: var(--certificate-ratio);
     margin: 0;
     outline: none;
+    // Horizontal touch movement reaches the swipe handler; vertical pan and pinch stay native.
+    touch-action: pan-y pinch-zoom;
+    user-select: none;
+    -webkit-user-select: none;
   }
   &__expanded img {
     position: absolute;

@@ -164,6 +164,12 @@ const start = async (event: MouseEvent) => {
       outline: 3px solid #f6d797;
       outline-offset: -5px;
     }
+
+    // Touch browsers spread native controls over the whole video (fullscreen, PiP,
+    // volume, ±10s, play); the overlay would swallow every tap. Native controls only.
+    @media (hover: none), (pointer: coarse) {
+      display: none;
+    }
   }
 
   &__cover img {
